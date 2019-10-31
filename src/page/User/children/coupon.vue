@@ -31,13 +31,6 @@
             <img src="../../../assets/img/data.png" alt />
             <div class="txt">暂无数据...</div>
           </el-row>
-<!--          <el-row class="couponNoneWarp" v-else>-->
-<!--            <el-image-->
-<!--              style="width: 132px; height: 116px"-->
-<!--              src="../../../../static/images/none.png"-->
-<!--              fit="fill"></el-image>-->
-<!--            <el-row class="couponNoneText">空空如也</el-row>-->
-<!--          </el-row>-->
         </el-tab-pane>
 
         <!--已用&失效-->
@@ -65,13 +58,6 @@
             <img src="../../../assets/img/data.png" alt />
             <div class="txt">暂无数据...</div>
           </el-row>
-<!--          <el-row class="couponNoneWarp" v-else>-->
-<!--            <el-image-->
-<!--              style="width: 132px; height: 116px"-->
-<!--              src="../../../../static/images/none.png"-->
-<!--              fit="fill"></el-image>-->
-<!--            <el-row class="couponNoneText">空空如也</el-row>-->
-<!--          </el-row>-->
         </el-tab-pane>
       </el-tabs>
     </el-main>

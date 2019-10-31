@@ -46,9 +46,8 @@
           </el-form-item>
 
           <el-form-item label="优惠卷" >
-            <el-select v-model="ruleForm.coupon" placeholder="无可用优惠劵" :disabled="true">
-              <el-option label="Bitcoin" value="shanghai"></el-option>
-              <el-option label="Bitcoin Cash" value="beijing"></el-option>
+            <el-select v-model="ruleForm.coupon" placeholder="请选择优惠卷" @change="currentSel">
+              <el-option :label=item.name v-for="(item, i) in goodsInfo.coupon" :key="i" v-if="goodsInfo.coupon"  :value="item" >{{item.name}}</el-option>
             </el-select>
           </el-form-item>
 
@@ -427,6 +426,7 @@
   export default {
     data () {
       return {
+        couponIDNumber: 0, // 优惠卷ID
         contractFalg: false, // 合同flag
         unpaid: 0, // 未支付金额
         buy_day: 0, // 上传电费天数
@@ -544,6 +544,7 @@
       }
     },
     methods: {
+
       // 完成支付
       paymentSuccess () {
         this.qrCodeFalg = false
@@ -653,6 +654,10 @@
           this.totalCase = parseFloat(this.totalCase).toFixed(2)
         }
       },
+      // 绑定优惠卷ID
+      currentSel (selVal) {
+        this.couponIDNumber = selVal.cid
+      },
       // 拉取订单信息
       loadingOrderList () {
         this.loadingWarp = this.$loading({
@@ -739,13 +744,13 @@
         } else {
           this.coin_id = this.ruleForm.currency
         }
-        const {coupon, trusteeshipM, btcAddress, orePool, electricityDays, num, paymentMethod, userAddress} = this.ruleForm
+        const {trusteeshipM, btcAddress, orePool, electricityDays, num, paymentMethod, userAddress} = this.ruleForm
         const user_id = getItem('userID')
         const share_activity_id = this.$route.query.share_activity_id
         const coin_id = this.coin_id
         const buy_num = num
         const cycle_id = this.cycle_id
-        const coupon_id = coupon
+        const coupon_id = this.couponIDNumber
         const mine_id = orePool
         const host_id = trusteeshipM
         const address_id = userAddress // 收货地址

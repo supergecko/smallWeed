@@ -1,154 +1,154 @@
 <template>
-  <el-container style="display: flex;align-items: center;padding-top: 20px">
-    <!--返佣头部-->
-    <el-header style="height: auto">
-      <el-image
-        style="width: 950px; height: 193px"
-        src="../../../../static/images/rakeBg.png"
-        fit="fill"></el-image>
-    </el-header>
-    <el-main style="padding-top: 0px;overflow-x: hidden">
-      <!--合伙人规则-->
-      <el-row>
-        <el-row class="rakeHeader">
-          <div class="rakeHeaderBTn">合伙人规则</div>
-        </el-row>
-        <el-row class="rakeMiddleWarp">
-          <el-col :span="6" class="rakeMiddleItem">
-            <div class="rakeMiddleTips">1</div>
-            <div class="rakeMiddleText">合伙人可使用专属邀请码进行新用户（普通用户）推广，新用户可使用合伙人专属邀请码注册并下单</div>
-          </el-col>
-          <el-col :span="6" class="rakeMiddleItem">
-            <div class="rakeMiddleTips">2</div>
-            <div class="rakeMiddleText">合伙人可获得使用其邀请码注册的普通用户所购买的雷猫产品全额的10%返佣，以及5%的缴纳电费金额返佣。（返佣以雷猫币的方式体现，下同）</div>
-          </el-col>
-          <el-col :span="6" class="rakeMiddleItem">
-            <div class="rakeMiddleTips">3</div>
-            <div class="rakeMiddleText">当普通用户购买雷猫产品金额高于10万元人民币，将可以选择升级成为合伙人。此时，其上级合伙人将不再获得新合伙人产品购买金额的返佣奖励</div>
-          </el-col>
-          <el-col :span="6" class="rakeMiddleItem">
-            <div class="rakeMiddleTips">4</div>
-            <div class="rakeMiddleText">但可获得通过新合伙人专属邀请码注册的新用户产品购买金额的2%，以及缴纳电费金额的2%返佣</div>
-          </el-col>
-        </el-row>
-      </el-row>
-      <!--我的团队-->
-      <el-row style="width: 950px;background:rgba(255,255,255,1);margin-top: 67px">
-        <el-row class="rakeHeader">
-          <div class="rakeHeaderBTn">我的团队</div>
-        </el-row>
-
-        <!--爷爷-->
-        <!--为空的时候-->
-        <el-row v-show="leader.length===0">
-          <el-row class="publicTitle">
-            <el-row style="margin-bottom: -6px">我的推荐人</el-row>
-            <el-row class="publicTitleFooterBtn"></el-row>
+    <el-container style="display: flex;align-items: center;padding-top: 20px">
+      <!--返佣头部-->
+      <el-header style="height: auto">
+        <el-image
+          style="width: 950px; height: 193px"
+          src="../../../../static/images/rakeBg.png"
+          fit="fill"></el-image>
+      </el-header>
+      <el-main style="padding-top: 0px;overflow-x: hidden">
+        <!--合伙人规则-->
+        <el-row>
+          <el-row class="rakeHeader">
+            <div class="rakeHeaderBTn">合伙人规则</div>
           </el-row>
-          <div class="myTeam1 myLeader" style="margin: 0 auto" >
-            <div class="team1Title">普通用户</div>
-            <el-row style="margin-top: 50px;">
-              <el-col :span="15" class="teamLeft">
-                <div class="userName">用户名:暂无</div>
-                <div>累计贡献值:暂无</div>
-              </el-col>
-              <el-col :span="9" style="text-align: center;margin-top: -20px;">
-                <el-image
-                  style="width: 100px; height: 100px"
-                  src="../../static/lmbImg/qrcodeLocal.png"
-                  fit="fill"></el-image>
-              </el-col>
+          <el-row class="rakeMiddleWarp">
+            <el-col :span="6" class="rakeMiddleItem">
+              <div class="rakeMiddleTips">1</div>
+              <div class="rakeMiddleText">合伙人可使用专属邀请码进行新用户（普通用户）推广，新用户可使用合伙人专属邀请码注册并下单</div>
+            </el-col>
+            <el-col :span="6" class="rakeMiddleItem">
+              <div class="rakeMiddleTips">2</div>
+              <div class="rakeMiddleText">合伙人可获得使用其邀请码注册的普通用户所购买的雷猫产品全额的10%返佣，以及5%的缴纳电费金额返佣。（返佣以雷猫币的方式体现，下同）</div>
+            </el-col>
+            <el-col :span="6" class="rakeMiddleItem">
+              <div class="rakeMiddleTips">3</div>
+              <div class="rakeMiddleText">当普通用户购买雷猫产品金额高于10万元人民币，将可以选择升级成为合伙人。此时，其上级合伙人将不再获得新合伙人产品购买金额的返佣奖励</div>
+            </el-col>
+            <el-col :span="6" class="rakeMiddleItem">
+              <div class="rakeMiddleTips">4</div>
+              <div class="rakeMiddleText">但可获得通过新合伙人专属邀请码注册的新用户产品购买金额的2%，以及缴纳电费金额的2%返佣</div>
+            </el-col>
+          </el-row>
+        </el-row>
+        <!--我的团队-->
+        <el-row style="width: 950px;background:rgba(255,255,255,1);margin-top: 67px">
+          <el-row class="rakeHeader">
+            <div class="rakeHeaderBTn">我的团队</div>
+          </el-row>
+
+          <!--爷爷-->
+          <!--为空的时候-->
+          <el-row v-show="leader.length===0">
+            <el-row class="publicTitle">
+              <el-row style="margin-bottom: -6px">我的推荐人</el-row>
+              <el-row class="publicTitleFooterBtn"></el-row>
             </el-row>
-          </div>
-        </el-row>
-        <!--不为空-->
-        <el-row v-show="!(leader.length===0)">
-          <el-row class="publicTitle">
-            <el-row style="margin-bottom: -6px">我的推荐人</el-row>
-            <el-row class="publicTitleFooterBtn"></el-row>
+            <div class="myTeam1 myLeader" style="margin: 0 auto" >
+              <div class="team1Title">普通用户</div>
+              <el-row style="margin-top: 50px;">
+                <el-col :span="15" class="teamLeft">
+                  <div class="userName">用户名:暂无</div>
+                  <div>累计贡献值:暂无</div>
+                </el-col>
+                <el-col :span="9" style="text-align: center;margin-top: -20px;">
+                  <el-image
+                    style="width: 100px; height: 100px"
+                    src="../../static/lmbImg/qrcodeLocal.png"
+                    fit="fill"></el-image>
+                </el-col>
+              </el-row>
+            </div>
           </el-row>
-          <div class="myTeam1 myLeader" style="margin: 0 auto">
-            <div class="team1Title">{{leader.identity===1?'普通用户':'雷猫合伙人'}}</div>
-            <el-row style="margin-top: 50px;">
-              <el-col :span="15" class="teamLeft">
-                <div class="userName">用户名:{{leader.nickname}}</div>
-                <div>累计贡献值:{{leader.results===null?0:leader.results}}</div>
-              </el-col>
-              <el-col :span="9" style="text-align: center;margin-top: -20px;">
-                <el-image
-                  style="width: 100px; height: 100px"
-                  :src=leader.qrcode
-                  fit="fill"></el-image>
-              </el-col>
+          <!--不为空-->
+          <el-row v-show="!(leader.length===0)">
+            <el-row class="publicTitle">
+              <el-row style="margin-bottom: -6px">我的推荐人</el-row>
+              <el-row class="publicTitleFooterBtn"></el-row>
             </el-row>
-          </div>
-        </el-row>
-
-        <!--儿子-->
-        <el-row v-show="children.length===0">
-          <el-row class="publicTitle secondTitle">
-            <el-row style="margin-bottom: -6px">我邀请的人</el-row>
-            <el-row class="publicTitleFooterBtn"></el-row>
+            <div class="myTeam1 myLeader" style="margin: 0 auto">
+              <div class="team1Title">{{leader.identity===1?'普通用户':'雷猫合伙人'}}</div>
+              <el-row style="margin-top: 50px;">
+                <el-col :span="15" class="teamLeft">
+                  <div class="userName">用户名:{{leader.nickname}}</div>
+                  <div>累计贡献值:{{leader.results===null?0:leader.results}}</div>
+                </el-col>
+                <el-col :span="9" style="text-align: center;margin-top: -20px;">
+                  <el-image
+                    style="width: 100px; height: 100px"
+                    :src=leader.qrcode
+                    fit="fill"></el-image>
+                </el-col>
+              </el-row>
+            </div>
           </el-row>
-          <el-carousel :autoplay="false" type="card" ref="carousel" v-on:change="changeFun" style="width: 950px;margin: 0 auto;">
-            <el-carousel-item v-for="(item, i) in 3" :key="i" name="index" style="height: 264px;border-radius:10px;">
-              <div class="myTeam1">
-                <div class="team1Title">普通用户</div>
-                <el-row style="margin-top: 50px;">
-                  <el-col :span="15" class="teamLeft">
-                    <div class="userName">用户名:暂无</div>
-                    <div>累计贡献值:暂无</div>
-                  </el-col>
-                  <el-col :span="9" style="text-align: center;margin-top: -20px;">
-                    <el-image
-                      style="width: 100px; height: 100px"
-                      src="../../static/lmbImg/qrcodeLocal.png"
-                      fit="fill"></el-image>
-                  </el-col>
-                </el-row>
-              </div>
-            </el-carousel-item>
-          </el-carousel>
-        </el-row>
-        <el-row v-show="!(children.length===0)">
-          <el-row class="publicTitle secondTitle">
-            <el-row style="margin-bottom: -6px">我邀请的人</el-row>
-            <el-row class="publicTitleFooterBtn"></el-row>
-          </el-row>
-          <el-carousel :autoplay="false" type="card" ref="carousel" v-on:change="changeFun">
-            <el-carousel-item v-for="(item, i) in children" :key="i" name="index" style="height: 264px;border-radius:10px;">
-              <div class="myTeam1">
-                <div class="team1Title">{{item.identity===1?'普通用户':'雷猫合伙人'}}</div>
-                <el-row style="margin-top: 50px;">
-                  <el-col :span="15" class="teamLeft">
-                    <div class="userName">用户名:{{item.nickname}}</div>
-                    <div>累计贡献值:{{item.results==null? 0 : item.results}}</div>
-                  </el-col>
-                  <el-col :span="9" style="text-align: center;margin-top: -20px;">
-                    <el-image
-                      style="width: 100px; height: 100px"
-                      :src="item.qrcode"
-                      fit="fill"></el-image>
-                  </el-col>
-                </el-row>
-              </div>
-            </el-carousel-item>
-          </el-carousel>
-        </el-row>
 
-        <!--孙子-->
-        <el-row style="display: flex;justify-content: center">
-          <el-image
-            style="width: 52px; height: 52px"
-            src="../../../../../static/lmbImg/downArrow.png"
-            fit="fill"></el-image>
+          <!--儿子-->
+          <el-row v-show="children.length===0">
+            <el-row class="publicTitle secondTitle">
+              <el-row style="margin-bottom: -6px">我邀请的人</el-row>
+              <el-row class="publicTitleFooterBtn"></el-row>
+            </el-row>
+            <el-carousel :autoplay="false" type="card" ref="carousel" v-on:change="changeFun" style="width: 950px;margin: 0 auto;">
+              <el-carousel-item v-for="(item, i) in 3" :key="i" name="index" style="height: 264px;border-radius:10px;">
+                <div class="myTeam1">
+                  <div class="team1Title">普通用户</div>
+                  <el-row style="margin-top: 50px;">
+                    <el-col :span="15" class="teamLeft">
+                      <div class="userName">用户名:暂无</div>
+                      <div>累计贡献值:暂无</div>
+                    </el-col>
+                    <el-col :span="9" style="text-align: center;margin-top: -20px;">
+                      <el-image
+                        style="width: 100px; height: 100px"
+                        src="../../static/lmbImg/qrcodeLocal.png"
+                        fit="fill"></el-image>
+                    </el-col>
+                  </el-row>
+                </div>
+              </el-carousel-item>
+            </el-carousel>
+          </el-row>
+          <el-row v-show="!(children.length===0)">
+            <el-row class="publicTitle secondTitle">
+              <el-row style="margin-bottom: -6px">我邀请的人</el-row>
+              <el-row class="publicTitleFooterBtn"></el-row>
+            </el-row>
+            <el-carousel :autoplay="false" type="card" ref="carousel" v-on:change="changeFun">
+              <el-carousel-item v-for="(item, i) in children" :key="i" name="index" style="height: 264px;border-radius:10px;">
+                <div class="myTeam1">
+                  <div class="team1Title">{{item.identity===1?'普通用户':'雷猫合伙人'}}</div>
+                  <el-row style="margin-top: 50px;">
+                    <el-col :span="15" class="teamLeft">
+                      <div class="userName">用户名:{{item.nickname}}</div>
+                      <div>累计贡献值:{{item.results==null? 0 : item.results}}</div>
+                    </el-col>
+                    <el-col :span="9" style="text-align: center;margin-top: -20px;">
+                      <el-image
+                        style="width: 100px; height: 100px"
+                        :src="item.qrcode"
+                        fit="fill"></el-image>
+                    </el-col>
+                  </el-row>
+                </div>
+              </el-carousel-item>
+            </el-carousel>
+          </el-row>
+
+          <!--孙子-->
+          <el-row style="display: flex;justify-content: center">
+            <el-image
+              style="width: 52px; height: 52px"
+              src="../../../../../static/lmbImg/downArrow.png"
+              fit="fill"></el-image>
+          </el-row>
+          <el-row style="width: 950px;margin: 0 auto">
+            <secondary-agent :flag=flag :grandson=grandson ref="mychild"></secondary-agent>
+          </el-row>
         </el-row>
-        <el-row style="width: 950px;margin: 0 auto">
-          <secondary-agent :flag=flag :grandson=grandson ref="mychild"></secondary-agent>
-        </el-row>
-      </el-row>
-    </el-main>
-  </el-container>
+      </el-main>
+    </el-container>
 </template>
 
 <script>
@@ -198,7 +198,7 @@
       this._polularizeDetail()
     },
     created () {
-
+      this._polularizeDetail()
     },
     components: {
       secondaryAgent
