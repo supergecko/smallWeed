@@ -82,6 +82,7 @@
 </template>
 
 <script>
+import { indexSEO } from '/api/index'
 export default {
   data: function () {
     return {
@@ -89,10 +90,54 @@ export default {
         // '../../../static/imgs/banner.png',
         // '../../../static/imgs/banner.png',
         '../../../static/imgs/banner.png'
-      ]
+      ],
+      seoTitle: '',
+      seoMateName: '',
+      seoMateContent1: '',
+      seoMateContent2: ''
     }
   },
-  methods: {}
+  metaInfo () {
+    return {
+      title: this.seoTitle,
+      meta: [{
+        name: 'keyWords',
+        content: this.seoMateContent1
+      }, {
+        name: 'description',
+        content: this.seoMateContent2
+      }]
+    }
+  },
+  methods: {
+    _indexSEO () {
+      const scene = 7
+      let params = {scene}
+      const loading = this.$loading({
+        text: '加载中',
+        background: 'rgba(0, 0, 0, 0.7)',
+        fullscreen: true,
+        target: '.wrapper'
+      })
+      indexSEO(params).then(res => {
+        loading.close()
+        console.log(res)
+        if (res.status === 200 && res.data.code === 1) {
+          this.seoTitle = res.data.data.title
+          this.seoMateContent1 = res.data.data.keywords
+          this.seoMateContent2 = res.data.data.description
+        } else {
+          this.$message.error('网络赛车啦')
+        }
+      })
+    }
+  },
+  mounted () {
+    this._indexSEO()
+  },
+  created () {
+    this._indexSEO()
+  }
 }
 </script>
 

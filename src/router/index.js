@@ -9,14 +9,16 @@ const AboutUs = resolve => require(['/page/AboutUs/aboutUs'], resolve)
 const ServiceAgreement = resolve => require(['/page/ServiceAgreement/serviceAgreement'], resolve)
 const OrderList = resolve => require(['/page/OrderList/orderList'], resolve)
 const CrowdFunding = resolve => require(['/page/CrowdFunding/crowdFunding'], resolve)
-const RakeBack = resolve => require(['/page/RakeBack/rakeBack'], resolve)
+
 const Jackpot = resolve => require(['/page/Jackpot/Jackpot'], resolve)
 const user = resolve => require(['/page/User/user'], resolve)
 const news = resolve => require(['/page/News/news'], resolve)
 const orderDetail = resolve => require(['/page/Order/orderDetail'], resolve)
 const newDetails = resolve => require(['/page/NewDetails/newDetails'], resolve)
+const PromotionRules = resolve => require(['/page/PromotionRules/PromotionRules'], resolve)
 const orderList = resolve => require(['/page/User/children/order'], resolve)
 const userInfo = resolve => require(['/page/User/children/userInfo'], resolve)
+const RakeBack = resolve => require(['/page/User/children/rakeBack'], resolve)
 const myTeam = resolve => require(['/page/User/children/myTeam'], resolve)
 const information = resolve => require(['/page/User/children/information'], resolve)
 const chargeRecharge = resolve => require(['/page/User/children/chargeRecharge'], resolve)
@@ -43,7 +45,7 @@ export default new Router({
       children: [
         { path: 'home', component: Home },
         { path: 'jackpot', component: Jackpot },
-        { path: 'rakeBack', component: RakeBack },
+        { path: 'PromotionRules', component: PromotionRules },
         { path: 'crowdFunding', component: CrowdFunding },
         { path: 'orderList', name: 'orderList', component: OrderList },
         { path: 'mineField', component: MineField },
@@ -80,6 +82,7 @@ export default new Router({
       meta: { requireAuth: true },
       children: [
         { path: 'orderList', name: '订单列表', component: orderList },
+        { path: 'RakeBack', name: '推广返佣', component: RakeBack },
         { path: 'myTeam', name: '我的团队', component: myTeam },
         { path: 'information', name: '控制面板', component: information },
         { path: 'addressList', name: '收益地址', component: addressList },

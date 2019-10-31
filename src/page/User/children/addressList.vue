@@ -85,7 +85,7 @@
         const user_id = getItem('userID')
         const coin_id = 1
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, coin_id, timestamp, sign}
         getWallet(params).then(res => {
           if (res.status === 200 && res.data.code === 1) {
@@ -117,7 +117,7 @@
           const address = value
           const coin_id = 1
           const timestamp = Date.parse(new Date()) / 1000
-          const sign = this.$md5(`${user_id}__${coin_id}__${address}__${timestamp}__thundercat`)
+          const sign = this.$md5(`${user_id}__${coin_id}__${address}__${timestamp}__elseleimaohasjer2860`)
           let params = {user_id, coin_id, address, timestamp, sign}
           const loading = this.$loading({
             text: '添加中',

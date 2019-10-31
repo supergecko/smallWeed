@@ -20,7 +20,7 @@
       <div class="content">
         <div class="des">{{ this.new.description }}</div>
         <div class="c-content"
-             v-html='content'
+             v-html='testContent'
              v-if="this.new.content">
           {{ content }}
         </div>
@@ -40,24 +40,34 @@ export default {
     }
   },
   created () {
-    let id = this.$route.query.id
-    let params = {
-      article_id: id
-    }
-
-    // axios.get('http://www.dterdal.com/home/article/detail',
-    //   { params: {
-    //     article_id: id
-    //   } }).then(res => {
-    //   this.new = res.data.data
-    //   console.log(this.new)
-    // })
-    newsDetails(params)
-      .then(res => {
-        this.new = res.data.data
-      })
+    this._newsDetails()
   },
-  methods: {},
+  mounted () {
+    this._newsDetails()
+  },
+  methods: {
+    _newsDetails () {
+      const loading = this.$loading({
+        text: '加载中',
+        background: 'rgba(0, 0, 0, 0.7)',
+        fullscreen: true
+      })
+      const id = this.$route.query.id
+      let params = {
+        article_id: id
+      }
+      newsDetails(params).then(res => {
+        if (res.status === 200 && res.data.code === 1) {
+          this.new = res.data.data
+          console.log(res.data.data)
+          loading.close()
+        } else {
+          loading.close()
+          this.$message.error(res.data.msg)
+        }
+      })
+    }
+  },
   computed: {
     content () {
       var str = this.new.content

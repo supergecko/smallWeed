@@ -190,7 +190,7 @@ export default {
       const user_id = getItem('userID')
       let order_id = this.$route.query.id
       const timestamp = Date.parse(new Date()) / 1000
-      const sign = this.$md5(`${user_id}__${order_id}__${timestamp}__thundercat`)
+      const sign = this.$md5(`${user_id}__${order_id}__${timestamp}__elseleimaohasjer2860`)
       let params = {
         user_id,
         order_id,
@@ -220,7 +220,7 @@ export default {
         const user_id = getItem('userID')
         let order_id = this.$route.query.id
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${order_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${order_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {
           user_id,
           order_id,

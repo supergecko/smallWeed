@@ -99,15 +99,52 @@
 </template>
 
 <script>
-  import { goodsList } from '/api'
+  import { goodsList, indexSEO } from '/api'
 
   export default {
     data () {
       return {
-        goodsList: [] // 商品详情列表
+        goodsList: [], // 商品详情列表
+        seoTitle: '',
+        seoMateName: '',
+        seoMateContent1: '',
+        seoMateContent2: ''
+      }
+    },
+    metaInfo () {
+      return {
+        title: this.seoTitle,
+        meta: [{
+          name: 'keyWords',
+          content: this.seoMateContent1
+        }, {
+          name: 'description',
+          content: this.seoMateContent2
+        }]
       }
     },
     methods: {
+      _indexSEO () {
+        const scene = 2
+        let params = {scene}
+        const loading = this.$loading({
+          text: '加载中',
+          background: 'rgba(0, 0, 0, 0.7)',
+          fullscreen: true,
+          target: '.wrapper'
+        })
+        indexSEO(params).then(res => {
+          loading.close()
+          console.log(res)
+          if (res.status === 200 && res.data.code === 1) {
+            this.seoTitle = res.data.data.title
+            this.seoMateContent1 = res.data.data.keywords
+            this.seoMateContent2 = res.data.data.description
+          } else {
+            this.$message.error('网络赛车啦')
+          }
+        })
+      },
       openOrderList (share_activity_id, goods_id) {
         this.$router.push({
           path: '/orderList',
@@ -129,6 +166,7 @@
         const page = 1
         let params = {page}
         goodsList(params).then(res => {
+          this._indexSEO()
           loading.close()
           if (res.status === 200 && res.data.code === 1) {
             this.goodsList = res.data.data

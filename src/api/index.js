@@ -140,3 +140,8 @@ export const identityAuthentication = (params) => {
 export const identityAuthenticationExist = (params) => {
   return ypost(`${baseUrl}/home/user/identityAuthenticationExist`, params)
 }
+
+// 页面SEO
+export const indexSEO = (params) => {
+  return ypost(`${baseUrl}/home/seo/index`, params)
+}

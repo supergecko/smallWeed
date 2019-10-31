@@ -7,14 +7,34 @@
         <div>个人信息</div>
       </el-row>
       <el-row v-show="IdInfoFlag" class="IdCardInfo">
+        <!--审核中-->
         <el-image v-show="IdCardImgVerify"
           style="width: 100px; height: 100px;margin-top: 39px;"
           src="../../../static/imgs/padding.png"
           fit="fill"></el-image>
-        <el-image v-show="!IdCardImgVerify"
-          style="width: 100px; height: 100px;margin-top: 39px;"
-          src="../../../static/imgs/passed.png"
-          fit="fill"></el-image>
+        <!--审核通过-->
+<!--        <el-image v-show="!IdCardImgVerify"-->
+<!--          style="width: 100px; height: 100px;margin-top: 39px;"-->
+<!--          src="../../../static/imgs/passed.png"-->
+<!--          fit="fill"></el-image>-->
+        <el-row style="height: 140px;display: flex;flex-direction: column;justify-content: space-between;" v-show="!IdCardImgVerify">
+          <el-row style="width:950px;">
+            <el-col :span="3">状态</el-col>
+            <el-col :span="21">{{loginArry.user_authentication_des}}</el-col>
+          </el-row>
+          <el-row style="width:950px">
+            <el-col :span="3">姓名</el-col>
+            <el-col :span="21">{{loginArry.realname}}</el-col>
+          </el-row>
+          <el-row style="width:950px">
+            <el-col :span="3">手机号</el-col>
+            <el-col :span="21">{{loginArry.mobile}}</el-col>
+          </el-row>
+          <el-row style="width:950px">
+            <el-col :span="3">身份证号</el-col>
+            <el-col :span="21">{{loginArry.idcard}}</el-col>
+          </el-row>
+        </el-row>
       </el-row>
       <el-row v-show="!IdInfoFlag">
         <el-form style="padding-top: 20px" label-width="100px" :model="IdFormData" :rules="IdInfoRules" ref="IdFormData">
@@ -196,6 +216,7 @@
           mobile: '', // 收获手机
           zipcode: '' // 邮编
         },
+        loginArry: {},
         formRules: {
           // 收货地区校验
           receivingArea: [
@@ -231,26 +252,35 @@
       async _identityAuthenticationExist () {
         const user_id = await getItem('userID')
         const timestamp = await Date.parse(new Date()) / 1000
-        const sign = await this.$md5(`${user_id}__${timestamp}__thundercat`)
+        const sign = await this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}
         identityAuthenticationExist(params).then(res => {
           if (res.status === 200 && res.data.code === 1) {
-            if (res.data.data.user_authentication_status === -1) {
-              this.IdInfoFlag = false
-              this.$alert('完善个人信息将获得雷猫积分奖励', '提示', {
-                confirmButtonText: '确定'
-              })
-            } else {
-              this.IdInfoFlag = true
-              if (res.data.data.user_authentication_des === 0) {
-                this.IdCardImgVerify = true
-              } else if (res.data.data.user_authentication_des === 1) {
-                this.IdCardImgVerify = false
-              } else {
-                this.IdCardImgVerify = true
-              }
-              this.user_authentication_des = res.data.data.user_authentication_des
+            switch (res.data.data.user_authentication_status) {
+              case 0:
+                this.IdCardImgVerify = true// 待审核
+                this.IdInfoFlag = true
+                break
+              case 1:
+                this.IdCardImgVerify = false // 已验证
+                this.IdInfoFlag = true
+                this.loginArry = res.data.data
+                break
+              case 2:
+                this.IdCardImgVerify = true // 未设置
+                this.IdInfoFlag = false
+                this.$alert('你的个人信息不通过,请重新上传', '提示', {
+                  confirmButtonText: '确定'
+                })
+                break
+              default:
+                this.IdCardImgVerify = true // 未设置
+                this.IdInfoFlag = false
+                this.$alert('完善个人信息将获得雷猫积分奖励', '提示', {
+                  confirmButtonText: '确定'
+                })
             }
+            this.user_authentication_des = res.data.data.user_authentication_des
           } else {
             this.$message.error(res.data.msg)
           }
@@ -270,7 +300,7 @@
         const back = this.IdCardBackImg
         const user_id = getItem('userID')
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${realname}__${idcard}__${mobile}__${face}__${back}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${realname}__${idcard}__${mobile}__${face}__${back}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, realname, idcard, mobile, face, back, timestamp, sign}
         identityAuthentication(params).then(res => {
           loading.close()
@@ -279,7 +309,9 @@
               message: '上传成功',
               type: 'success'
             })
+            this.$router.go(0)
           } else {
+            loading.close()
             this.$message.error(res.data.msg)
           }
         })
@@ -345,7 +377,7 @@
         const user_id = getItem('userID')
         const coin_id = 1
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, coin_id, timestamp, sign}
         getWallet(params).then(res => {
           if (res.status === 200 && res.data.code === 1) {
@@ -377,7 +409,7 @@
           const address = value
           const coin_id = 1
           const timestamp = Date.parse(new Date()) / 1000
-          const sign = this.$md5(`${user_id}__${coin_id}__${address}__${timestamp}__thundercat`)
+          const sign = this.$md5(`${user_id}__${coin_id}__${address}__${timestamp}__elseleimaohasjer2860`)
           let params = {user_id, coin_id, address, timestamp, sign}
           const loading = this.$loading({
             text: '添加中',
@@ -410,7 +442,7 @@
             const town = ''
             const user_id = getItem('userID')
             const timestamp = Date.parse(new Date()) / 1000
-            const sign = this.$md5(`${user_id}__${province}__${city}__${district}__${town}__${consignee}__${mobile}__${zipcode}__${address}__${timestamp}__thundercat`)
+            const sign = this.$md5(`${user_id}__${province}__${city}__${district}__${town}__${consignee}__${mobile}__${zipcode}__${address}__${timestamp}__elseleimaohasjer2860`)
             let params = {user_id, province, city, district, town, consignee, mobile, zipcode, address, timestamp, sign}
             saveAddress(params).then(res => {
               if (res.status === 200 && res.data.code === 1) {
@@ -434,7 +466,7 @@
       _getUserAddress () {
         const user_id = getItem('userID')
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}
         getUserAddress(params).then(res => {
           if (res.status === 200 && res.data.code === 1) {

@@ -1,60 +1,64 @@
 <template>
   <div>
-    <!--    <el-table-->
-    <!--      :data="tableData"-->
-    <!--      stripe-->
-    <!--      style="width: 100%;background: rgba(61,60,69,1);">-->
-    <!--      <el-table-column-->
-    <!--        prop="ranking"-->
-    <!--        label="排名"-->
-    <!--        width="203">-->
-    <!--      </el-table-column>-->
-    <!--      <el-table-column-->
-    <!--        prop="name"-->
-    <!--        label="账号"-->
-    <!--        width="203">-->
-    <!--      </el-table-column>-->
-    <!--      <el-table-column-->
-    <!--        prop="contribution"-->
-    <!--        label="累计贡献值"-->
-    <!--        width="203">-->
-    <!--      </el-table-column>-->
-    <!--      <el-table-column-->
-    <!--        prop="Get"-->
-    <!--        label="预计瓜分雷猫积分">-->
-    <!--      </el-table-column>-->
-    <!--    </el-table>-->
     <el-row class="tableWarp">
-      <el-row class="tableHeader">
-        <el-col :span="5">排名</el-col>
+      <el-row class="tableHeader"  v-if="order_list">
+        <el-col :span="5" >排名</el-col>
         <el-col :span="9">账号</el-col>
         <el-col :span="9">累计贡献值</el-col>
-        <el-col :span="9" v-if="flag">预计瓜分雷猫积分</el-col>
+        <el-col :span="9">预计瓜分雷猫积分</el-col>
       </el-row>
-      <!--v-show="order_list.length===0" v-if="order_list"-->
-      <el-row>
-        <el-row v-for="(item,index) in 10" :key="index">
+      <el-row class="tableHeader" v-if="all_team_order">
+        <el-col :span="12">账号</el-col>
+        <el-col :span="12">累计贡献值</el-col>
+      </el-row>
+
+      <!--没数据的时候-->
+      <el-row v-show="order_list.length===0" v-if="order_list">
+        <el-row v-for="(item,index) in 10"
+                :key="index">
           <el-row class="tableHeader tableList"
                   :style="{'background': (index%2==0 ? 'rgb(2,25,70)':'')}">
             <el-col :span="5">{{index+1}}</el-col>
             <el-col :span="9"></el-col>
             <el-col :span="9"></el-col>
-            <el-col :span="9" v-if="flag"></el-col>
+            <el-col :span="9"></el-col>
           </el-row>
         </el-row>
       </el-row>
-<!--      <el-row v-show="!(order_list.length===0)" v-if="order_list">-->
-<!--        <el-row v-for="(item,index) in order_list"-->
-<!--                :key="index">-->
-<!--          <el-row class="tableHeader tableList"-->
-<!--                  :style="{'background': (index%2==0 ? 'rgb(2,25,70)':'')}">-->
-<!--            <el-col :span="5">{{item.rank}}</el-col>-->
-<!--            <el-col :span="9">{{item.mobile}}</el-col>-->
-<!--            <el-col :span="9">￥{{item.all_results}}</el-col>-->
-<!--            <el-col :span="9" v-if="flag">￥{{item.get_thundercat_coin}}</el-col>-->
-<!--          </el-row>-->
-<!--        </el-row>-->
-<!--      </el-row>-->
+
+      <!--有数据的时候-->
+      <el-row v-show="!(order_list.length===0)" v-if="order_list">
+        <el-row v-for="(item,index) in order_list"
+                :key="index">
+          <el-row class="tableHeader tableList"
+                  :style="{'background': (index%2==0 ? 'rgb(2,25,70)':'')}">
+            <el-col :span="5">{{item.rank}}</el-col>
+            <el-col :span="9">{{item.mobile}}</el-col>
+            <el-col :span="9">￥{{item.all_results}}</el-col>
+            <el-col :span="9">￥{{item.get_thundercat_coin}}</el-col>
+          </el-row>
+        </el-row>
+      </el-row>
+
+      <!--没数据的时候-->
+      <el-row v-show="all_team_order.length===0" v-if="all_team_order">
+        <el-row v-for="(item,index) in 2" :key="index">
+          <el-row class="tableHeader tableList" :style="{'background': (index%2==0 ? 'rgb(2,25,70)':'')}">
+            <el-col :span="12"></el-col>
+            <el-col :span="12"></el-col>
+          </el-row>
+        </el-row>
+      </el-row>
+
+      <!--有数据的时候-->
+      <el-row v-show="!(all_team_order.length===0)" v-if="all_team_order">
+        <el-row v-for="(item,index) in all_team_order" :key="index">
+          <el-row class="tableHeader tableList" :style="{'background': (index%2==0 ? 'rgb(2,25,70)':'')}">
+            <el-col :span="12">{{item.mobile}}</el-col>
+            <el-col :span="12">￥{{item.self_result}}</el-col>
+          </el-row>
+        </el-row>
+      </el-row>
     </el-row>
     <!--    <div class="championFooter">-->
     <!--      <div class="footerBtn">查看更多</div>-->
@@ -67,7 +71,8 @@
 export default {
   props: {
     order_list: Array,
-    flag: Boolean
+    flag: Boolean,
+    all_team_order: Array
   },
   created () {
     console.log(this.order_list)

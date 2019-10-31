@@ -173,7 +173,7 @@
         const user_id = getItem('userID')
         const order_electricity_id = this.$route.query.order_electricity_id
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${order_electricity_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${order_electricity_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, order_electricity_id, timestamp, sign}
         buyElectricityDetail(params).then(res => {
           loading.close()
@@ -206,7 +206,7 @@
         const pay_id = payment
         const order_electricity_id = this.$route.query.order_electricity_id
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${order_electricity_id}__${buy_day}__${pay_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${order_electricity_id}__${buy_day}__${pay_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, order_electricity_id, buy_day, pay_id, timestamp, sign}
         buyElectricityCost(params).then(res => {
           loading.close()

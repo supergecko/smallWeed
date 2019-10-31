@@ -13,6 +13,7 @@ import 'swiper/dist/css/swiper.css'
 import md5 from 'js-md5'
 import axios from 'axios'
 import { getItem } from './utils/newLocalStorage'
+import MetaInfo from 'vue-meta-info'
 
 Vue.prototype.$md5 = md5
 Vue.use(VueAwesomeSwiper)
@@ -20,6 +21,7 @@ Vue.use(ElementUI)
 Vue.use(VueClipboard)
 Vue.use(infiniteScroll)
 Vue.use(VueCookie)
+Vue.use(MetaInfo)
 Vue.use(VueLazyload, {
   // preLoad: 1.3,
   // error: 'dist/error.png',

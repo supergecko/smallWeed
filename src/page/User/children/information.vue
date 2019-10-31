@@ -260,7 +260,7 @@
       async _isBindMine () {
         const user_id = await getItem('userID')
         const timestamp = await Date.parse(new Date()) / 1000
-        const sign = await this.$md5(`${user_id}__${timestamp}__thundercat`)
+        const sign = await this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}
         isBindMine(params).then(res => {
           if (res.status === 200 && res.data.code === 1) {
@@ -288,7 +288,7 @@
             const account = poolId
             const password = poolPassword
             const timestamp = Date.parse(new Date()) / 1000
-            const sign = this.$md5(`${user_id}__${account}__${password}__${username}__${mine_id}__${timestamp}__thundercat`)
+            const sign = this.$md5(`${user_id}__${account}__${password}__${username}__${mine_id}__${timestamp}__elseleimaohasjer2860`)
             let params = {user_id, account, password, timestamp, username, mine_id, sign}
             bindMine(params).then(res => {
               if (res.status === 200 && res.data.code === 1) {
@@ -313,7 +313,7 @@
         const user_id = await getItem('userID')
         const coin_id = 1
         const timestamp = await Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, coin_id, timestamp, sign}
         controlPanel(params).then(res => {
           loading.close()

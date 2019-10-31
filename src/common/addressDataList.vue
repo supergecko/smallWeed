@@ -144,7 +144,7 @@
             const town = ''
             const timestamp = Date.parse(new Date()) / 1000
             const address_id = this.address_id
-            const sign = this.$md5(`${user_id}__${province}__${city}__${district}__${town}__${address_id}__${consignee}__${mobile}__${zipcode}__${address}__${timestamp}__thundercat`)
+            const sign = this.$md5(`${user_id}__${province}__${city}__${district}__${town}__${address_id}__${consignee}__${mobile}__${zipcode}__${address}__${timestamp}__elseleimaohasjer2860`)
             let params = {user_id, province, city, district, town, address_id, consignee, mobile, zipcode, address, timestamp, sign}
             editAddress(params).then(res => {
               loading.close()
@@ -181,7 +181,7 @@
           const address = value
           const wallet_id = this.wallet_id
           const timestamp = Date.parse(new Date()) / 1000
-          const sign = this.$md5(`${user_id}__${wallet_id}__${address}__${timestamp}__thundercat`)
+          const sign = this.$md5(`${user_id}__${wallet_id}__${address}__${timestamp}__elseleimaohasjer2860`)
           let params = {user_id, wallet_id, address, timestamp, sign}
           const loading = this.$loading({
             text: '修改中',
@@ -220,7 +220,7 @@
           const user_id = getItem('userID')
           const address_id = Address_id
           const timestamp = Date.parse(new Date()) / 1000
-          const sign = this.$md5(`${user_id}__${address_id}__${timestamp}__thundercat`)
+          const sign = this.$md5(`${user_id}__${address_id}__${timestamp}__elseleimaohasjer2860`)
           let params = {user_id, address_id, timestamp, sign}
           deleteUserAddress(params).then(res => {
             loading.close()
@@ -258,7 +258,7 @@
           const user_id = getItem('userID')
           const wallet_id = Wallet_id
           const timestamp = Date.parse(new Date()) / 1000
-          const sign = this.$md5(`${user_id}__${wallet_id}__${timestamp}__thundercat`)
+          const sign = this.$md5(`${user_id}__${wallet_id}__${timestamp}__elseleimaohasjer2860`)
           let params = {user_id, wallet_id, timestamp, sign}
           deleteWalletAddress(params).then(res => {
             loading.close()

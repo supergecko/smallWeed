@@ -11,7 +11,7 @@
           <el-col :span="10">
             <div class="grid-content bg-purple leftContent">
               <div class="titleLeft">
-                <div class="leftItem1"><span class="titleNumber">0</span>万</div>
+                <div class="leftItem1"><span class="titleNumber">{{jackpot_thundercat_coin}}</span>万</div>
                 <div class="leftItem1">雷猫积分</div>
               </div>
               <div class="leftItem2">奖池积分</div>
@@ -31,19 +31,23 @@
               <div>
                 <div style="display: flex;margin-top: 28px">
                   <span class="rightNumber">1</span>
-                  <span style="webkit-text-fill-color: transparent;">商城全部成交金额的1%会注入奖池</span>
+                  <span style="webkit-text-fill-color: transparent;">雷猫商城全部成交金额的1%会注入奖池</span>
                 </div>
                 <div style="display: flex;margin-top: 28px">
                   <span class="rightNumber">2</span>
-                  <span style="webkit-text-fill-color: transparent;">累计贡献值排行榜最高的前十名能够参与奖池积分的发放</span>
+                  <span style="webkit-text-fill-color: transparent;">雷猫商城合伙人有权参与奖池瓜分</span>
                 </div>
                 <div style="display: flex;margin-top: 28px">
                   <span class="rightNumber">3</span>
-                  <span style="webkit-text-fill-color: transparent;">奖池积分发放规则：按照个人贡献值进行比例分配</span>
+                  <span style="webkit-text-fill-color: transparent;">达成分阶段目标，即可享受阶段目标对应比例的奖池分红</span>
                 </div>
                 <div style="display: flex;margin-top: 28px">
                   <span class="rightNumber">4</span>
-                  <span style="webkit-text-fill-color: transparent;">贡献值累计规则：个人与下级团队贡献值所累积之和</span>
+                  <span style="webkit-text-fill-color: transparent;">完成更高阶段目标的合伙人，同样参与低阶段目标奖池分红</span>
+                </div>
+                <div style="display: flex;margin-top: 28px">
+                  <span class="rightNumber">5</span>
+                  <span style="webkit-text-fill-color: transparent;">若分阶段目标无人达成，则该阶段对应奖池金额累计至下期活动</span>
                 </div>
               </div>
             </div>
@@ -65,20 +69,13 @@
             <p class="championTitle">贡献排行榜</p>
           </div>
         </el-row>
-        <el-row class="ratingWarp" v-loading="loading"
-                element-loading-text="正在统计中敬请期待"
-                element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(0, 0, 0, 1)"
-                element-loading-custom-class="ratingWarpMaskText">
-          <jackpot-data-list :order_list=rankList :flag=true></jackpot-data-list>
-<!--          <el-row class="ratingWarpMask">-->
-<!--            <div class="ratingWarpMaskText">正在统计中敬请期待</div>-->
-<!--          </el-row>-->
-        </el-row>
+		<el-row style="display: flex;justify-content: center;align-items: center;">
+			<jackpot-data-list :order_list=rankList :flag=true></jackpot-data-list>
+		</el-row>
       </el-row>
 
       <el-row>
-        <div class="middleTitle">累计贡献值：<span>{{jackpot_thundercat_coin}}</span>雷猫积分</div>
+        <div class="middleTitle">累计奖池积分：<span>{{jackpot_thundercat_coin}}万</span>雷猫积分</div>
       </el-row>
 
       <el-row style="margin-top: 84px">
@@ -90,12 +87,13 @@
             <p class="championTitle">我的贡献明细</p>
           </div>
         </el-row>
-        <el-row class="ratingWarp"v-loading="loading"
+<!--        <el-row class="ratingWarp"v-loading="loading"
                 element-loading-text="正在统计中敬请期待"
                 element-loading-spinner="el-icon-loading"
                 element-loading-background="rgba(0, 0, 0, 1)"
-                element-loading-custom-class="ratingWarpMaskText">
-          <jackpot-data-list :order_list=all_team_order :flag=false></jackpot-data-list>
+                element-loading-custom-class="ratingWarpMaskText"> -->
+		<el-row style="display: flex;justify-content: center;align-items: center;">
+          <jackpot-data-list :all_team_order=all_team_order :flag=false></jackpot-data-list>
         </el-row>
       </el-row>
     </el-main>
@@ -103,7 +101,7 @@
 </template>
 
 <script>
-import { jackpotIndex } from '/api'
+import { jackpotIndex, indexSEO } from '/api'
 import JackpotDataList from '/common/jackpotDataList'
 import { getItem } from './../../utils/newLocalStorage'
 export default {
@@ -112,10 +110,47 @@ export default {
       loading: true,
       jackpot_thundercat_coin: 0, // 奖池总LMB
       rankList: [], // 排行榜
-      all_team_order: [] // 团队贡献
+      all_team_order: [], // 团队贡献
+      seoTitle: '',
+      seoMateName: '',
+      seoMateContent1: '',
+      seoMateContent2: ''
+    }
+  },
+  metaInfo () {
+    return {
+      title: this.seoTitle,
+      meta: [{
+        name: 'keyWords',
+        content: this.seoMateContent1
+      }, {
+        name: 'description',
+        content: this.seoMateContent2
+      }]
     }
   },
   methods: {
+    _indexSEO () {
+      const scene = 3
+      let params = {scene}
+      const loading = this.$loading({
+        text: '加载中',
+        background: 'rgba(0, 0, 0, 0.7)',
+        fullscreen: true,
+        target: '.wrapper'
+      })
+      indexSEO(params).then(res => {
+        loading.close()
+        console.log(res)
+        if (res.status === 200 && res.data.code === 1) {
+          this.seoTitle = res.data.data.title
+          this.seoMateContent1 = res.data.data.keywords
+          this.seoMateContent2 = res.data.data.description
+        } else {
+          this.$message.error('网络赛车啦')
+        }
+      })
+    },
     _jackpotIndex () {
       const loading = this.$loading({
         text: '加载中',
@@ -125,14 +160,16 @@ export default {
       const page = 1
       const user_id = getItem('userID')
       const timestamp = Date.parse(new Date()) / 1000
-      const sign = this.$md5(`${user_id}__${page}__${timestamp}__thundercat`)
+      const sign = this.$md5(`${user_id}__${page}__${timestamp}__elseleimaohasjer2860`)
       let params = { page, user_id, timestamp, sign }
       jackpotIndex(params).then(res => {
+        this._indexSEO()
         loading.close()
         if (res.status === 200 && res.data.code === 1) {
+          console.log(res.data.data)
           this.jackpot_thundercat_coin = res.data.data.jackpot_thundercat_coin
           this.rankList = res.data.data.rankList
-          this.all_team_order = res.data.data.all_team_order
+          this.all_team_order = JSON.parse(res.data.data.all_team_order)
         } else {
           this.$message.error(res.data.msg)
         }

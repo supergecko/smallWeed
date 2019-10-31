@@ -60,7 +60,7 @@
         })
         const user_id = getItem('userID')
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}
         orderDataList(params).then(res => {
           loading.close()

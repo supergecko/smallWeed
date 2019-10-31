@@ -96,8 +96,21 @@
           </div>
         </el-col>
       </el-col>
+      <!--  联系我们-->
+      <div class="connectUs" ref="connectUs">
+<!--        <div class="llgQQ" @mouseenter="enter(1)" @mouseleave="leave(0)" ref="llgQQ"></div>-->
+        <div class="llgWX" @mouseenter="enter(2)" @mouseleave="leave(0)" ref="llgWX"></div>
+        <div class="llgTel" @mouseenter="enter(3)" @mouseleave="leave(0)" ref="llgWX"></div>
+      </div>
+<!--      二维码-->
+<!--      <div class="llgQR" v-if="qrType == 1" style="border:1px solid red;"></div>-->
+      <div class="llgQR" v-if="qrType == 2"  style="background-image: url('/static/images/lmkf.jpg');background-size:100%;"></div>
+      <div class="llgTelInfo" v-if="qrType == 3"  >
+        181 - 4405 - 5176  林经理
+      </div>
     </div>
   </div>
+
 </template>
 <script>
 import { setItem, getItem } from '../utils/newLocalStorage'
@@ -105,7 +118,8 @@ import { homePage } from '/api'
 export default {
   data () {
     return {
-      footerRate: getItem('footRate')
+      footerRate: getItem('footRate'),
+      qrType: 0
     }
   },
   methods: {
@@ -123,6 +137,14 @@ export default {
           this.$message.error(res.data.msg)
         }
       })
+    },
+
+    enter (par) {
+      this.qrType = par
+    },
+
+    leave (par) {
+      this.qrType = par
     }
   },
   created () {
@@ -212,5 +234,54 @@ export default {
 .iconfont:hover {
   color: #fff;
   text-decoration: none;
+}
+.connectUs{
+  width:60px;
+  height: 180px;
+  position: fixed;
+  left: unset;
+  right: 1%;
+  top:unset;
+  bottom: 35%;
+  z-index: 2019;
+  }
+.llgWX{
+  width: 80px;
+  height:80px;
+  background-image: url("/static/images/icon-Wx.png");
+  background-size:100%;
+}
+.llgTel{
+  width: 80px;
+  height:80px;
+  background-image: url("/static/images/icon-tel.png");
+  background-size:100%;
+}
+  .llgQR{
+    width:200px;
+    height:200px;
+    position: fixed;
+    left: unset;
+    right: 4%;
+    top:unset;
+    bottom: 35%;
+    z-index: 2019;
+  }
+.llgTelInfo{
+  width:250px;
+  height:65px;
+  position: fixed;
+  left: unset;
+  right: 4.3%;
+  top:unset;
+  bottom: 37.8%;
+  z-index: 2019;
+  background: #FFFFFF;
+  border-radius: 25px;
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 70px;
+  color: #1a1a1a;
+  box-shadow:darkgrey 2px 2px 2px 2px ;
 }
 </style>

@@ -165,7 +165,7 @@
         } else {
           const timestamp = Date.parse(new Date()) / 1000
           const scene = 1
-          const sign = this.$md5(`${mobile}__${scene}__${timestamp}__thundercat`)
+          const sign = this.$md5(`${mobile}__${scene}__${timestamp}__elseleimaohasjer2860`)
           let params = {mobile, timestamp, scene, sign}
           const loading = this.$loading({
             text: '发送中',
@@ -201,7 +201,7 @@
           const mobile = userName
           const password = userPwd
           const timestamp = Date.parse(new Date()) / 1000
-          const sign = this.$md5(`${mobile}__${password}__${timestamp}__thundercat`)
+          const sign = this.$md5(`${mobile}__${password}__${timestamp}__elseleimaohasjer2860`)
           let params = {mobile, password, timestamp, sign}
           const loading = this.$loading({
             text: '登录中',
@@ -234,7 +234,7 @@
         const invite_code = userPhone
         const scene = 1
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${mobile}__${scene}__${password}__${password2}__${code}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${mobile}__${scene}__${password}__${password2}__${code}__${timestamp}__elseleimaohasjer2860`)
         let params = {mobile, scene, password, password2, code, timestamp, invite_code, sign}
         const loading = this.$loading({
           text: '注册中',

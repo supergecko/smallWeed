@@ -33,6 +33,7 @@ export const getItem = (name) => {
     item = JSON.parse(item)
   } catch (error) {
     // 如果不行就不是json的字符串，就直接返回
+
   }
   // 如果有startTime的值，说明设置了失效时间
   if (item) {

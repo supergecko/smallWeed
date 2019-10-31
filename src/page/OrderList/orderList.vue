@@ -568,7 +568,7 @@
             const district = CodeToText[receivingArea[2]]
             const town = ''
             const timestamp = Date.parse(new Date()) / 1000
-            const sign = this.$md5(`${user_id}__${province}__${city}__${district}__${town}__${consignee}__${mobile}__${zipcode}__${address}__${timestamp}__thundercat`)
+            const sign = this.$md5(`${user_id}__${province}__${city}__${district}__${town}__${consignee}__${mobile}__${zipcode}__${address}__${timestamp}__elseleimaohasjer2860`)
             let params = {user_id, province, city, district, town, consignee, mobile, zipcode, address, timestamp, sign}
             saveAddress(params).then(res => {
               if (res.status === 200 && res.data.code === 1) {
@@ -598,7 +598,7 @@
         }
         const coin_id = this.coin_id
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, coin_id, timestamp, sign}
         getWallet(params).then(res => {
           if (res.status === 200 && res.data.code === 1) {
@@ -619,7 +619,7 @@
       _getUserAddress () {
         const user_id = getItem('userID')
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${user_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}
         getUserAddress(params).then(res => {
           if (res.status === 200 && res.data.code === 1) {
@@ -705,7 +705,7 @@
           }
           const coin_id = this.coin_id
           const timestamp = Date.parse(new Date()) / 1000
-          const sign = this.$md5(`${user_id}__${coin_id}__${address}__${timestamp}__thundercat`)
+          const sign = this.$md5(`${user_id}__${coin_id}__${address}__${timestamp}__elseleimaohasjer2860`)
           let params = {user_id, coin_id, address, timestamp, sign}
           const loading = this.$loading({
             text: '添加中',
@@ -760,7 +760,7 @@
         const deduct_ele_by_thundercat = this.lmbPayment
         const goods_id = this.$route.query.goods_id
         const timestamp = Date.parse(new Date()) / 1000
-        const sign = this.$md5(`${this.initMinePrice}__${this.electricity}__${user_id}__${timestamp}__thundercat`)
+        const sign = this.$md5(`${this.initMinePrice}__${this.electricity}__${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, share_activity_id, coin_id, buy_num, cycle_id, coupon_id, mine_id, host_id, address_id, wallet_id, buy_day, pay_id, goods_id, deduct_ele_by_thundercat, timestamp, sign}
         buyNow(params).then(res => {
           loading.close()

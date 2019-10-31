@@ -330,7 +330,7 @@
 </template>
 <script>
   // import { setItem } from '../../utils/newLocalStorage'
-  import { homePage } from '/api'
+  import { homePage, indexSEO } from '/api'
   import YShelf from '/components/shelf'
 
   export default {
@@ -340,6 +340,10 @@
         banner: [], // 轮播组
         activity: [], // 众筹数组
         mark: 0,
+        seoTitle: '',
+        seoMateName: '',
+        seoMateContent1: '',
+        seoMateContent2: '',
         bgOpt: {
           offsetLeft: 0,
           offsetTop: 0,
@@ -348,7 +352,40 @@
         }
       }
     },
+    metaInfo () {
+      return {
+        title: this.seoTitle,
+        meta: [{
+          name: 'keyWords',
+          content: this.seoMateContent1
+        }, {
+          name: 'description',
+          content: this.seoMateContent2
+        }]
+      }
+    },
     methods: {
+      _indexSEO () {
+        const scene = 1
+        let params = {scene}
+        const loading = this.$loading({
+          text: '加载中',
+          background: 'rgba(0, 0, 0, 0.7)',
+          fullscreen: true,
+          target: '.wrapper'
+        })
+        indexSEO(params).then(res => {
+          loading.close()
+          console.log(res)
+          if (res.status === 200 && res.data.code === 1) {
+            this.seoTitle = res.data.data.title
+            this.seoMateContent1 = res.data.data.keywords
+            this.seoMateContent2 = res.data.data.description
+          } else {
+            this.$message.error('网络赛车啦')
+          }
+        })
+      },
       openOrderList (share_activity_id, goods_id) {
         this.$router.push({
           path: '/orderList',
@@ -422,6 +459,7 @@
           fullscreen: true
         })
         homePage().then(res => {
+          this._indexSEO()
           if (res.status === 200 && res.data.code === 1) {
             this.banner = res.data.data.ad
             this.activity = res.data.data.activity
@@ -437,6 +475,7 @@
       this._homePage1()
     },
     created () {
+      this._indexSEO()
       this.play()
     },
     components: {

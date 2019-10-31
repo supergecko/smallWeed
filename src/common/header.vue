@@ -38,8 +38,8 @@
                                  :class="{classA: this.$route.path=='/jackpot'? true:false}">奖池瓜分</router-link>
                   </li>
                   <li>
-                    <router-link to="/rakeBack"
-                                 :class="{classA: this.$route.path=='/rakeBack'? true:false}">推广返佣</router-link>
+                    <router-link to="/PromotionRules"
+                                 :class="{classA: this.$route.path=='/PromotionRules'? true:false}">推广返佣</router-link>
                   </li>
                   <li>
                     <router-link to="/mineField"
@@ -147,7 +147,7 @@ export default {
         this.$route.path === '/home' ||
         this.$route.path === '/goodsDetails' ||
         this.$route.path === '/jackpot' ||
-        this.$route.path === '/rakeBack' ||
+        this.$route.path === '/PromotionRules' ||
         this.$route.path === '/crowdFunding' ||
         this.$route.path === '/aboutUs' ||
         this.$route.path === '/orderList' ||
