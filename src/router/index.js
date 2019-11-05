@@ -9,7 +9,7 @@ const AboutUs = resolve => require(['/page/AboutUs/aboutUs'], resolve)
 const ServiceAgreement = resolve => require(['/page/ServiceAgreement/serviceAgreement'], resolve)
 const OrderList = resolve => require(['/page/OrderList/orderList'], resolve)
 const CrowdFunding = resolve => require(['/page/CrowdFunding/crowdFunding'], resolve)
-
+const Calculator = resolve => require(['/page/Calculator/Calculator'], resolve)
 const Jackpot = resolve => require(['/page/Jackpot/Jackpot'], resolve)
 const user = resolve => require(['/page/User/user'], resolve)
 const news = resolve => require(['/page/News/news'], resolve)
@@ -47,6 +47,7 @@ export default new Router({
         { path: 'jackpot', component: Jackpot },
         { path: 'PromotionRules', component: PromotionRules },
         { path: 'crowdFunding', component: CrowdFunding },
+        { path: 'Calculator', component: Calculator },
         { path: 'orderList', name: 'orderList', component: OrderList },
         { path: 'mineField', component: MineField },
         { path: 'aboutUs', component: AboutUs },

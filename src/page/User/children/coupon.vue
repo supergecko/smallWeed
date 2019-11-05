@@ -16,7 +16,7 @@
                   <el-col :span="8" class="couponHeaderLeft">{{item.name}}</el-col>
                   <el-col :span="16" class="couponHeaderRight">
                     <div>￥<span style="font-size: 56px">{{item.money}}</span></div>
-                    <div>使用日期</div>
+                    <div>有效期</div>
                     <span>{{item.begin_time}}-{{item.end_time}}</span>
                   </el-col>
                 </el-row>
@@ -33,17 +33,17 @@
           </el-row>
         </el-tab-pane>
 
-        <!--已用&失效-->
+        <!--已用-->
         <el-tab-pane name="second">
-          <span slot="label">已用&失效<span style="color:#409EFF;">({{unavailable.length}})</span></span>
+          <span slot="label">已用卡券<span style="color:#409EFF;">({{unavailable.length}})</span></span>
           <el-row v-if="!(unavailable.length===0)">
             <el-col :span="8" class="couponWarp" v-for="(item, i) in unavailable" :key="i">
-              <el-row class="couponItem">
+              <el-row class="couponItem couponItem1">
                 <el-row class="couponBtnHeader">
                   <el-col :span="8" class="couponHeaderLeft">{{item.name}}</el-col>
                   <el-col :span="16" class="couponHeaderRight">
                     <div>￥<span style="font-size: 56px">{{item.money}}</span></div>
-                    <div>使用日期</div>
+                    <div>有效期</div>
                     <div>{{item.begin_time}}-{{item.end_time}}</div>
                   </el-col>
                 </el-row>
@@ -59,6 +59,34 @@
             <div class="txt">暂无数据...</div>
           </el-row>
         </el-tab-pane>
+
+        <!--失效-->
+        <el-tab-pane name="third">
+          <span slot="label">过期卡券<span style="color:#409EFF;">({{overtime.length}})</span></span>
+          <el-row v-if="!(overtime.length===0)">
+            <el-col :span="8" class="couponWarp" v-for="(item, i) in overtime" :key="i">
+              <el-row class="couponItem">
+                <el-row class="couponBtnHeader">
+                  <el-col :span="8" class="couponHeaderLeft">{{item.name}}</el-col>
+                  <el-col :span="16" class="couponHeaderRight">
+                    <div>￥<span style="font-size: 56px">{{item.money}}</span></div>
+                    <div>有效期</div>
+                    <div>{{item.begin_time}}-{{item.end_time}}</div>
+                  </el-col>
+                </el-row>
+                <el-row class="couponBtnFooter">
+                  <span>使用规则：优惠券仅限在有效期内</span>
+                  <!--                  <div class="couponDOwn"></div>-->
+                </el-row>
+              </el-row>
+            </el-col>
+          </el-row>
+          <el-row class="main-info-wrap" v-else>
+            <img src="../../../assets/img/data.png" alt />
+            <div class="txt">暂无数据...</div>
+          </el-row>
+        </el-tab-pane>
+
       </el-tabs>
     </el-main>
   </div>
@@ -72,7 +100,8 @@
       return {
         activeName: 'first',
         available: [], // 可用礼券数组
-        unavailable: [] // 不可用礼券
+        unavailable: [], // 已用礼券
+        overtime: [] // 失效
       }
     },
     methods: {
@@ -83,7 +112,7 @@
           background: 'rgba(0, 0, 0, 0.7)',
           fullscreen: true
         })
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const timestamp = Date.parse(new Date()) / 1000
         const sign = this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}
@@ -91,7 +120,8 @@
           loading.close()
           if (res.status === 200 && res.data.code === 1) {
             this.available = res.data.data.available
-            this.unavailable = res.data.data.unavailable
+            this.unavailable = res.data.data.used
+            this.overtime = res.data.data.overtime
           } else {
             this.$message.error(res.data.msg)
           }

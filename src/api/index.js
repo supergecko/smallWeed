@@ -145,3 +145,29 @@ export const identityAuthenticationExist = (params) => {
 export const indexSEO = (params) => {
   return ypost(`${baseUrl}/home/seo/index`, params)
 }
+
+// 重置密码
+export const resetPassword = (params) => {
+  return ypost(`${baseUrl}/home/user/resetPassword`, params)
+}
+// 修改矿池账户
+export const modifyMine = (params) => {
+  return ypost(`${baseUrl}/home/panel/modifyMine`, params)
+}
+// 转账手续费配置
+export const transferConfig = (params) => {
+  return ypost(`${baseUrl}/home/panel/transfer_config`, params)
+}
+// 转账
+export const transfer = (params) => {
+  return ypost(`${baseUrl}/home/panel/transfer`, params)
+}
+// 取消订单
+export const cancelGoodOrder = (params) => {
+  return ypost(`${baseUrl}/home/order/cancelGoodsOrder`, params)
+}
+// 计算器相关算法参数
+export const calculator = (params) => {
+  return ypost(`${baseUrl}/home/index/calculator`, params)
+}
+

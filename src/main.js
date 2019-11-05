@@ -80,13 +80,13 @@ axios.interceptors.response.use(config => {
         error.message = `连接错误${error.response.status}`
     }
   } else {
-    error.message = '连接到服务器失败'
+    // error.message = '连接到服务器失败'
   }
   return Promise.reject(error.message)
 })
-const whiteList = ['/home', '/goods', '/login', '/goodsDetails', '/aboutUs', '/crowdFunding', '/news', '/privacyAgreement', '/userAgreement', '/mineField', '/newDetails', '/userLogin']
+const whiteList = ['/home', '/goods', '/login', '/goodsDetails', '/aboutUs', '/crowdFunding', '/news', '/privacyAgreement', '/userAgreement', '/mineField', '/newDetails', '/userLogin', '/PromotionRules', '/Calculator']
 router.beforeEach(function (to, from, next) {
-  if (!(getItem('userToken'))) {
+  if (!(getItem('userIDPC'))) {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
     } else {

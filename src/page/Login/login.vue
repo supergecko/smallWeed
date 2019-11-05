@@ -16,9 +16,13 @@
                 <input type="password" v-model="ruleForm.userPwd" @keyup.enter="login" placeholder="密码">
               </div>
             </li>
-            <li style="text-align: right" class="pr">
+            <li style="text-align: right;display: inline-block" class="pr">
               <span class="pa" style="top: 0;left: 0;color: #d44d44">{{ruleForm.errMsg}}</span>
-              <a href="javascript:;" style="padding: 0 5px" @click="loginPage = false">注册 THUNDERCAT ID</a>
+              <a href="javascript:;" style="padding: 0 5px" @click="toRegister">注册 THUNDERCAT ID</a>
+            </li>
+            <li style="float: right;display: inline-block" class="pr">
+              <span class="pa" style="top: 0;left: 0;color: #d44d44">{{ruleForm.errMsg}}</span>
+              <a href="javascript:;" style="padding: 0 5px" @click="toForget">修改密码</a>
             </li>
           </ul>
           <!--登陆-->
@@ -26,7 +30,9 @@
             <y-button text="登陆" :classStyle="isLoginOk" @btnClick="login" class="btn"></y-button>
           </div>
         </div>
-        <div class="registered" v-show="!loginPage">
+
+        <!--注册页面-->
+        <div class="registered" v-show="!registerFlag">
           <h4>注册 THUNDERCAT ID</h4>
           <div class="content" style="margin-top: 20px;">
             <el-form :model="registered" status-icon :rules="rules" ref="registered" label-width="100px" class="demo-registered">
@@ -65,11 +71,53 @@
                 <span>如果您已拥有 THUNDERCAT ID，则可在此</span>
                 <a href="javascript:;"
                    style="margin: 0 5px"
-                   @click="loginPage = true">登陆</a>
+                   @click="toLoginPage">登陆</a>
               </li>
             </ul>
           </div>
         </div>
+
+        <!--修改密码页面-->
+        <div class="registered" v-show="!loginForget">
+          <h4>修改密码</h4>
+          <div class="content" style="margin-top: 20px;">
+            <el-form :model="forgetArr" status-icon  ref="forgetArr" label-width="100px" class="demo-registered">
+              <el-form-item label="手机号">
+                <el-input placeholder="请输入手机号" v-model="forgetArr.mobile" autocomplete="off">
+                  <template slot="prepend">+ 86</template>
+                </el-input>
+              </el-form-item>
+
+              <el-form-item label="验证码">
+                <el-input v-model="forgetArr.verificationCode" placeholder="请输入验证码" style="width:150px;" autocomplete="off"></el-input>
+                <el-button type="info" style="float: right;width: 70px" @click="sendForgetCode" :disabled="sendCodeFlag === true">{{sendCodeText}}</el-button>
+              </el-form-item>
+
+              <el-form-item label="密码">
+                <el-input type="password" v-model="forgetArr.userPwd" autocomplete="off" placeholder="请输入密码"></el-input>
+              </el-form-item>
+
+              <el-form-item label="确认密码">
+                <el-input type="password" v-model="forgetArr.userPwd2" autocomplete="off" placeholder="请再次输入密码"></el-input>
+              </el-form-item>
+
+              <el-form-item>
+                <el-button type="primary" @click="_resetPassword">修改密码</el-button>
+              </el-form-item>
+            </el-form>
+
+            <ul class="common-form pr">
+              <li class="pa" style="left: 0;top: 0;margin: 0;color: #d44d44">{{registered.errMsg}}</li>
+              <li style="text-align: center;line-height: 48px;margin-bottom: 0;">
+                <span>如果您已拥有 THUNDERCAT ID，则可在此</span>
+                <a href="javascript:;"
+                   style="margin: 0 5px"
+                   @click="toLoginPage">登陆</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -77,7 +125,7 @@
 <script>
   import YFooter from '/common/footer'
   import YButton from '/components/YButton'
-  import { userLogin, register, sendCode } from '/api/index'
+  import { userLogin, register, sendCode, resetPassword } from '/api/index'
   import { mapMutations } from 'vuex'
 
   export default {
@@ -122,16 +170,26 @@
         intervalId: 0, // 定时器
         sendCodeText: '获取验证码',
         loginPage: true,
+        registerFlag: true,
+        loginForget: true,
         ruleForm: {
           userName: '',
           userPwd: ''
         },
+        // 注册
         registered: {
           mobile: '', // 手机号
           verificationCode: '', // 验证码
           userPwd: '',
           userPwd2: '',
           userPhone: '' // 用户的邀请码
+        },
+        // 忘记密码
+        forgetArr: {
+          mobile: '', // 手机号
+          verificationCode: '', // 验证码
+          userPwd: '',
+          userPwd2: ''
         },
         rules: {
           mobile: [
@@ -157,6 +215,19 @@
     },
     methods: {
       ...mapMutations(['UPDATE_ID']),
+      toLoginPage () {
+        this.loginPage = true
+        this.registerFlag = true
+        this.loginForget = true
+      },
+      toRegister () {
+        this.loginPage = false
+        this.registerFlag = false
+      },
+      toForget () {
+        this.loginPage = false
+        this.loginForget = false
+      },
       // 发送短信
       sendCode () {
         const {mobile} = this.registered
@@ -191,7 +262,109 @@
           })
         }
       },
-
+      // 发送忘记密码短信
+      sendForgetCode () {
+        const {mobile} = this.forgetArr
+        if (!mobile) {
+          this.$message({
+            message: '请输入手机号',
+            type: 'warning'
+          })
+        } else {
+          const timestamp = Date.parse(new Date()) / 1000
+          const scene = 3
+          const sign = this.$md5(`${mobile}__${scene}__${timestamp}__elseleimaohasjer2860`)
+          let params = {mobile, timestamp, scene, sign}
+          const loading = this.$loading({
+            text: '发送中',
+            background: 'rgba(0, 0, 0, 0.7)',
+            fullscreen: true,
+            target: '.wrapper'
+          })
+          sendCode(params).then(res => {
+            loading.close()
+            if (res.status === 200 && res.data.code === 1) {
+              this.sendCodeFlag = true
+              this.sendCodeText = 60
+              this.intervalId = setInterval(() => {
+                this.sendCodeText--
+              }, 1000)
+              this.$message({
+                message: '发送成功',
+                type: 'success'
+              })
+            } else {
+              this.$message.error(res.data.msg)
+            }
+          })
+        }
+      },
+      // 忘记密码
+      _resetPassword () {
+        const {mobile, userPwd, userPwd2, verificationCode} = this.forgetArr
+        if (mobile === '') {
+          this.$message({
+            message: '请输入手机号',
+            type: 'warning'
+          })
+          return
+        }
+        if (verificationCode === '') {
+          this.$message({
+            message: '请输入验证码',
+            type: 'warning'
+          })
+          return
+        }
+        if (userPwd === '') {
+          this.$message({
+            message: '请输入新密码',
+            type: 'warning'
+          })
+          return
+        }
+        if (userPwd2 === '') {
+          this.$message({
+            message: '请重复输入新密码',
+            type: 'warning'
+          })
+          return
+        }
+        if (!(userPwd2 === userPwd)) {
+          this.$message({
+            message: '两次密码不一样',
+            type: 'warning'
+          })
+          return
+        }
+        const new_password = userPwd
+        const code = verificationCode
+        const scene = 3
+        const timestamp = Date.parse(new Date()) / 1000
+        const sign = this.$md5(`${mobile}__${new_password}__${code}__${scene}__${timestamp}__elseleimaohasjer2860`)
+        let params = {mobile, new_password, code, scene, timestamp, sign}
+        const loading = this.$loading({
+          text: '注册中',
+          background: 'rgba(0, 0, 0, 0.7)',
+          fullscreen: true,
+          target: '.wrapper'
+        })
+        resetPassword(params).then(res => {
+          loading.close()
+          console.log(res)
+          if (res.status === 200 && res.data.code === 1) {
+            this.$message({
+              message: '修改密码成功',
+              type: 'success'
+            })
+            this.loginPage = true
+            this.registerFlag = true
+            this.loginForget = true
+          } else {
+            this.$message.error('网络赛车啦')
+          }
+        })
+      },
       // 登录
       login () {
         const {userName, userPwd} = this.ruleForm
@@ -251,6 +424,8 @@
               type: 'success'
             })
             this.loginPage = true
+            this.registerFlag = true
+            this.loginForget = true
             // this.$router.go(-1)
           } else {
             this.$message.error('网络赛车啦')

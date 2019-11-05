@@ -62,7 +62,7 @@
                       </el-tooltip>
                     </div>
                     <div class="total-revenue">
-                      <span>{{hashrate_balance.balance}}</span>
+                      <span>{{totalBalance}}</span>
                       <span class="total-content">BTC</span>
                     </div>
                     <div class="total-detail">
@@ -105,10 +105,12 @@
             <el-col :span="9" style="padding-left: 10px;">
               <el-card class="box-card" :body-style="{ padding: '0 0 0 20px'}">
                 <span class="title-line-bottom">矿池分配</span>
+                <span style="margin-left: 66px;font-size: 16px;color: cadetblue;font-weight: bold;">{{modifyMine}}</span>
+                <el-button type="primary" size="mini" round style="float: right;margin-top: 20px;margin-right: 10px;" @click="modifyPool = true">修改矿池</el-button>
                 <el-col  class="main-info-wrap" v-show="!this.poolFalg">
-                  <el-row style="background: #2889fc;">
+                  <el-row>
                     <el-image
-                      style="width: 236px; height: 70px"
+                      style="width: 274px; height:190px"
                       src="../../../static/imgs/pool.png"
                       fit="fiit"></el-image>
                   </el-row>
@@ -144,6 +146,7 @@
       </el-container>
     </div>
 
+    <!--绑定矿池-->
     <el-dialog title="绑定矿池" :visible.sync="dialogFormVisible" style="width:50%;margin: 0 auto;text-align: center ">
       <el-form :model="form" :rules="formRules" ref="form" class="demo-ruleForm">
         <!--鱼池名称-->
@@ -172,11 +175,41 @@
         <el-button type="primary"  @click="formCheckIn('form')">确 定</el-button>
       </div>
     </el-dialog>
+
+    <!--修改矿池-->
+    <el-dialog title="修改矿池" :visible.sync="modifyPool" style="width:50%;margin: 0 auto;text-align: center ">
+      <el-form :model="modifyPoolArr" :rules="formRules2" ref="modifyPoolArr" class="demo-ruleForm">
+        <!--鱼池名称-->
+        <el-form-item label="矿池名称" prop="poolName" :label-width="formLabelWidth">
+          <el-select v-model="modifyPoolArr.poolName" placeholder="请选择矿池" style="width: 100%;">
+            <el-option :label=item.description :value=item.mine_id v-for="(item, i) in mine" :key="i">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <!--矿池账号-->
+        <el-form-item label="矿池账号" :label-width="formLabelWidth" style="margin-bottom: 22px" prop="poolId">
+          <el-input v-model="modifyPoolArr.poolId" style="width: 100%"></el-input>
+        </el-form-item>
+        <!-- 矿池密码-->
+        <el-form-item label="矿池密码" :label-width="formLabelWidth" style="margin-bottom: 22px" prop="poolPassword">
+          <el-input v-model="modifyPoolArr.poolPassword" style="width: 100%" show-password></el-input>
+        </el-form-item>
+        <!--用户名-->
+        <el-form-item label="用 户 名" :label-width="formLabelWidth" style="margin-bottom: 22px" prop="poolUserName">
+          <el-input v-model="modifyPoolArr.poolUserName" style="width: 100%"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer" style="text-align: center;">
+        <el-button @click="modifyPool = false">取 消</el-button>
+        <el-button type="primary"  @click="formCheckIn2('modifyPoolArr')">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
   import YButton from '/components/YButton'
-  import { controlPanel, isBindMine, bindMine } from '/api'
+  import { controlPanel, isBindMine, bindMine, modifyMine } from '/api'
   import { getItem } from './../../../utils/newLocalStorage'
   import YShelf from '/components/shelf'
   import OrderOutput from '/common/OrderOutput'
@@ -186,20 +219,49 @@
   export default {
     data () {
       return {
-        userId: getItem('userID'),
+        totalBalance: 0, // 总产出
+        modifyMine: '', // 矿池信息验证
+        userId: getItem('userIDPC'),
         imgSrc: '',
         editAvatarShow: false,
-        dialogFormVisible: false,
+        dialogFormVisible: false, // 绑定矿池
+        modifyPool: false, // 修改矿池
         formLabelWidth: '80px',
         mine: [],
         poolFalg: false, // 鱼池图标flag
+        // 绑定矿池
         form: {
           poolName: '', // 矿池名称
           poolId: '', // 矿池账号
           poolPassword: '', // 矿池密码
           poolUserName: '' // 用户名
         },
+        // 修改矿池
+        modifyPoolArr: {
+          poolName: '', // 矿池名称
+          poolId: '', // 矿池账号
+          poolPassword: '', // 矿池密码
+          poolUserName: '' // 用户名
+        },
         formRules: {
+          // 矿池名称校验
+          poolName: [
+            {required: true, message: '请选择矿池', trigger: 'change'}
+          ],
+          // 矿池账号校验
+          poolId: [
+            {required: true, message: '请输入矿池账号', trigger: 'blur'}
+          ],
+          // 矿池密码校验
+          poolPassword: [
+            {required: true, message: '请输入矿池密码', trigger: 'blur'}
+          ],
+          // 用户名校验
+          poolUserName: [
+            {required: true, message: '请输入用户名', trigger: 'blur'}
+          ]
+        },
+        formRules2: {
           // 矿池名称校验
           poolName: [
             {required: true, message: '请选择矿池', trigger: 'change'}
@@ -246,7 +308,8 @@
         init_order: [], // 待运行
         doing_order: [], // 运行中
         end_order: [], // 已结束
-        day_balance: [] // 每日产出
+        day_balance: [], // 每日产出
+        mine_user_account_id: 0 // 绑定的矿池用户ID
       }
     },
     computed: {
@@ -257,20 +320,30 @@
         'RECORD_USERINFO'
       ]),
       // 是否绑定矿池
-      async _isBindMine () {
-        const user_id = await getItem('userID')
-        const timestamp = await Date.parse(new Date()) / 1000
-        const sign = await this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
+      _isBindMine () {
+        const loading = this.$loading({
+          text: '加载中',
+          background: 'rgba(0, 0, 0, 0.7)',
+          fullscreen: true
+        })
+        const user_id = getItem('userIDPC')
+        const timestamp = Date.parse(new Date()) / 1000
+        const sign = this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}
         isBindMine(params).then(res => {
+          loading.close()
           if (res.status === 200 && res.data.code === 1) {
+            this._controlPanel()
+            this.mine = res.data.data.mine
             if (res.data.data.bind_status === 0) {
               this.dialogFormVisible = true
               this.poolFalg = true
-              this.mine = res.data.data.mine
+              this.modifyMine = '未绑定'
             } else {
               this.dialogFormVisible = false
               this.poolFalg = false
+              this.modifyMine = '已绑定'
+              this.mine_user_account_id = res.data.data.exist.mine_user_account_id
             }
           } else {
             this.$message.error(res.data.msg)
@@ -282,7 +355,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             const { poolUserName, poolName, poolId, poolPassword } = this.form
-            const user_id = getItem('userID')
+            const user_id = getItem('userIDPC')
             const username = poolUserName
             const mine_id = poolName
             const account = poolId
@@ -304,15 +377,50 @@
           }
         })
       },
-      async _controlPanel () {
-        const loading = await this.$loading({
+      // 矿池修改
+      formCheckIn2 (formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            const { poolUserName, poolName, poolId, poolPassword } = this.modifyPoolArr
+            const user_id = getItem('userIDPC')
+            const username = poolUserName
+            const mine_id = poolName
+            const account = poolId
+            const password = poolPassword
+            const mine_user_account_id = this.mine_user_account_id
+            const timestamp = Date.parse(new Date()) / 1000
+            const sign = this.$md5(`${user_id}__${mine_user_account_id}__${account}__${password}__${username}__${mine_id}__${timestamp}__elseleimaohasjer2860`)
+            let params = {user_id, mine_user_account_id, account, password, timestamp, username, mine_id, sign}
+            modifyMine(params).then(res => {
+              if (res.status === 200 && res.data.code === 1) {
+                console.log(res.data.data)
+                this.$message({
+                  message: '修改矿池成功',
+                  type: 'success'
+                })
+                this.modifyPool = false
+                this._controlPanel()
+              } else {
+                this.$message.error(res.data.msg)
+              }
+            })
+            this.dialogFormVisible = false
+          } else {
+            this.$message.error('请填写完整信息')
+            return false
+          }
+        })
+      },
+
+      _controlPanel () {
+        const loading = this.$loading({
           text: '加载中',
           background: 'rgba(0, 0, 0, 0.7)',
           fullscreen: true
         })
-        const user_id = await getItem('userID')
+        const user_id = getItem('userIDPC')
         const coin_id = 1
-        const timestamp = await Date.parse(new Date()) / 1000
+        const timestamp = Date.parse(new Date()) / 1000
         const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, coin_id, timestamp, sign}
         controlPanel(params).then(res => {
@@ -325,9 +433,12 @@
             this.doing_order = res.data.data.doing_order
             this.end_order = res.data.data.end_order
             this.day_balance = res.data.data.day_balance
+            this.totalBalance = res.data.data.hashrate_balance.balance
+            console.log('刷新了')
           } else {
             this.$message.error(res.data.msg)
           }
+          this.$forceUpdate()
         })
       },
       tab (e) {
@@ -338,11 +449,12 @@
       }
     },
     mounted () {
-      this._controlPanel()
-    },
-    created () {
       this._isBindMine()
     },
+    // created () {
+    //   this._isBindMine()
+    //   this._controlPanel()
+    // },
     components: {
       YButton,
       YShelf,

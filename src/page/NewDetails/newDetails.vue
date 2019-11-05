@@ -19,11 +19,8 @@
 
       <div class="content">
         <div class="des">{{ this.new.description }}</div>
-        <div class="c-content"
-             v-html='testContent'
-             v-if="this.new.content">
-          {{ content }}
-        </div>
+        <section class="c-content" v-html='this.new.content' v-if="this.new">
+        </section>
       </div>
     </div>
   </div>

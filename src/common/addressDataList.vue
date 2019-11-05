@@ -137,7 +137,7 @@
               target: '.wrapper'
             })
             const { address, consignee, mobile, zipcode, receivingArea } = this.form
-            const user_id = getItem('userID')
+            const user_id = getItem('userIDPC')
             const province = CodeToText[receivingArea[0]]
             const city = CodeToText[receivingArea[1]]
             const district = CodeToText[receivingArea[2]]
@@ -177,7 +177,7 @@
           },
           inputErrorMessage: '输入不能为空'
         }).then(({value}) => {
-          const user_id = getItem('userID')
+          const user_id = getItem('userIDPC')
           const address = value
           const wallet_id = this.wallet_id
           const timestamp = Date.parse(new Date()) / 1000
@@ -217,7 +217,7 @@
             fullscreen: true,
             target: '.wrapper'
           })
-          const user_id = getItem('userID')
+          const user_id = getItem('userIDPC')
           const address_id = Address_id
           const timestamp = Date.parse(new Date()) / 1000
           const sign = this.$md5(`${user_id}__${address_id}__${timestamp}__elseleimaohasjer2860`)
@@ -255,7 +255,7 @@
             fullscreen: true,
             target: '.wrapper'
           })
-          const user_id = getItem('userID')
+          const user_id = getItem('userIDPC')
           const wallet_id = Wallet_id
           const timestamp = Date.parse(new Date()) / 1000
           const sign = this.$md5(`${user_id}__${wallet_id}__${timestamp}__elseleimaohasjer2860`)

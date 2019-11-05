@@ -112,7 +112,7 @@ export default {
   },
   data () {
     return {
-      userLoginText: getItem('userName') ? `尊敬的 ${getItem('userID')} 欢迎您` : '未登录', // 是否登录用户名显示
+      userLoginText: getItem('userIDPC') ? `尊敬的 ${getItem('userIDPC')} 欢迎您` : '未登录', // 是否登录用户名显示
       userLoginFalg: false,
       user: {},
       // 列表
@@ -155,6 +155,8 @@ export default {
         this.$route.path === '/news' ||
         this.$route.path === '/newDetails' ||
         this.$route.path === '/mineField' ||
+        this.$route.path === '/PromotionRules' ||
+        this.$route.path === '/Calculator' ||
         this.$route.path === '/store') {
         // 计算是否吸顶
         if (this.showNav) {
@@ -171,7 +173,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         let params = { user_id }
         loginOut(params).then(res => {
           if (res.status === 200 && res.data.code === 1) {

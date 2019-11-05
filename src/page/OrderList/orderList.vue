@@ -426,6 +426,7 @@
   export default {
     data () {
       return {
+        amountOfCoupon: 0, // 优惠卷金额
         couponIDNumber: 0, // 优惠卷ID
         contractFalg: false, // 合同flag
         unpaid: 0, // 未支付金额
@@ -563,7 +564,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             const { address, consignee, mobile, zipcode, receivingArea } = this.form
-            const user_id = getItem('userID')
+            const user_id = getItem('userIDPC')
             const province = CodeToText[receivingArea[0]]
             const city = CodeToText[receivingArea[1]]
             const district = CodeToText[receivingArea[2]]
@@ -591,7 +592,7 @@
       },
       // 获取用户钱包地址
       getWallet () {
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         if (this.ruleForm.currency === 'BTC') {
           this.coin_id = 1
         } else {
@@ -618,7 +619,7 @@
       },
       // 获取用户收货地址
       _getUserAddress () {
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const timestamp = Date.parse(new Date()) / 1000
         const sign = this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}
@@ -657,6 +658,7 @@
       // 绑定优惠卷ID
       currentSel (selVal) {
         this.couponIDNumber = selVal.cid
+        this.amountOfCoupon = selVal.money
       },
       // 拉取订单信息
       loadingOrderList () {
@@ -665,7 +667,7 @@
           background: 'rgba(0, 0, 0, 0.7)',
           fullscreen: true
         })
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const share_activity_id = this.$route.query.share_activity_id
         const goods_id = this.$route.query.goods_id
         let params = {share_activity_id, goods_id, user_id}
@@ -701,7 +703,7 @@
           },
           inputErrorMessage: '输入不能为空'
         }).then(({value}) => {
-          const user_id = getItem('userID')
+          const user_id = getItem('userIDPC')
           const address = value
           if (this.ruleForm.currency === 'BTC') {
             this.coin_id = 1
@@ -745,7 +747,7 @@
           this.coin_id = this.ruleForm.currency
         }
         const {trusteeshipM, btcAddress, orePool, electricityDays, num, paymentMethod, userAddress} = this.ruleForm
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const share_activity_id = this.$route.query.share_activity_id
         const coin_id = this.coin_id
         const buy_num = num
@@ -843,7 +845,7 @@
       // 矿机的台数
       'ruleForm.num' (newName, oldName) {
         this.totalCase = this.initMinePrice // 初始化总花费
-        this.totalCase = (parseFloat(this.totalCase) + parseFloat(this.totalElectricity)) * newName // 总花费(包含电费)
+        this.totalCase = ((parseFloat(this.totalCase) + parseFloat(this.totalElectricity)) * newName) - parseFloat(this.amountOfCoupon) // 总花费(包含电费)
         this.totalCase = parseFloat(this.totalCase).toFixed(2)
       },
       // 用户输入的天数
@@ -858,6 +860,11 @@
         this.initTotalElectricity = oldName
         this.totalCase = this.initMinePrice
         this.totalCase = (parseFloat(this.totalCase) + parseFloat(newName)) * this.ruleForm.num
+        this.totalCase = parseFloat(this.totalCase).toFixed(2)
+      },
+      // 优惠 劵变化
+      amountOfCoupon (newName, oldName) {
+        this.totalCase = (parseFloat(this.totalCase) - parseFloat(newName))
         this.totalCase = parseFloat(this.totalCase).toFixed(2)
       }
     }

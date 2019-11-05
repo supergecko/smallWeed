@@ -146,8 +146,7 @@
       </div>
 
       <div class="close">
-        <button class="btn"
-                @click="close()">关闭</button>
+        <button class="btn" @click="close()" :style="{display:(order_statue==='未支付')? 'inline-block':'none'}">关闭订单</button>
       </div>
 
     </div>
@@ -157,6 +156,7 @@
 
 <script>
 import YShelf from '/components/shelf'
+import { cancelGoodOrder } from '/api'
 import { orderDetail, shouhuo } from '/api/index'
 import { getItem } from './../../utils/newLocalStorage'
 
@@ -183,11 +183,43 @@ export default {
   },
   methods: {
     close () {
-      this.$router.push('/user/orderList')
+      this.$confirm('是否确定关闭该订单', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this._cancelGoodOrder()
+      }).catch(() => {})
+    },
+    // 关闭订单
+    _cancelGoodOrder () {
+      const user_id = getItem('userIDPC')
+      const order_id = this.$route.query.id
+      const timestamp = Date.parse(new Date()) / 1000
+      const sign = this.$md5(`${user_id}__${order_id}__${timestamp}__elseleimaohasjer2860`)
+      let params = {user_id, timestamp, order_id, sign}
+      const loading = this.$loading({
+        text: '关闭订单中',
+        background: 'rgba(0, 0, 0, 0.7)',
+        fullscreen: true,
+        target: '.wrapper'
+      })
+      cancelGoodOrder(params).then(res => {
+        loading.close()
+        if (res.status === 200 && res.data.code === 1) {
+          this.$message({
+            message: res.data.data.msg,
+            type: 'success'
+          })
+          this.$router.push('/user/orderList')
+        } else {
+          this.$message.error(res.data.msg)
+        }
+      })
     },
     getData () {
       // eslint-disable-next-line no-unused-vars
-      const user_id = getItem('userID')
+      const user_id = getItem('userIDPC')
       let order_id = this.$route.query.id
       const timestamp = Date.parse(new Date()) / 1000
       const sign = this.$md5(`${user_id}__${order_id}__${timestamp}__elseleimaohasjer2860`)
@@ -217,7 +249,7 @@ export default {
         cancelButtonText: '取消',
         type: 'info'
       }).then(() => {
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         let order_id = this.$route.query.id
         const timestamp = Date.parse(new Date()) / 1000
         const sign = this.$md5(`${user_id}__${order_id}__${timestamp}__elseleimaohasjer2860`)

@@ -14,8 +14,12 @@
           <div class="title">产品</div>
           <div class="link">
             <span>
-              <router-link class="router-link"
-                           to="/crowdFunding">矿机购买</router-link>
+              <router-link class="router-link" to="/crowdFunding">矿机购买</router-link>
+            </span>
+          </div>
+          <div class="link">
+            <span>
+              <router-link class="router-link" to="/Calculator">收益计算器</router-link>
             </span>
           </div>
         </el-col>

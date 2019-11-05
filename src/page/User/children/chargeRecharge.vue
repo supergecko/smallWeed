@@ -19,7 +19,7 @@
             <el-radio :label="90" @change="changeDays">90天</el-radio>
             <el-radio :label="150" @change="changeDays">150天</el-radio>
             <el-radio :label="200" @change="changeDays">
-              <el-input v-model=userInputDays placeholder="请输入天数(例如60代表6天)" style="width: 217px" :disabled="ruleForm.electricityDays===200? false: true"></el-input>
+              <el-input v-model=userInputDays placeholder="请输入天数(例如60代表60天)" style="width: 217px" :disabled="ruleForm.electricityDays===200? false: true"></el-input>
             </el-radio>
           </el-radio-group>
         </el-form-item>
@@ -170,7 +170,7 @@
           background: 'rgba(0, 0, 0, 0.7)',
           fullscreen: true
         })
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const order_electricity_id = this.$route.query.order_electricity_id
         const timestamp = Date.parse(new Date()) / 1000
         const sign = this.$md5(`${user_id}__${order_electricity_id}__${timestamp}__elseleimaohasjer2860`)
@@ -197,11 +197,11 @@
         })
         const {payment, electricityDays} = this.ruleForm
         if (electricityDays === 200) {
-          this.buy_day = parseFloat(this.userInputDays) * 30
+          this.buy_day = parseFloat(this.userInputDays)
         } else {
           this.buy_day = electricityDays
         }
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const buy_day = this.buy_day
         const pay_id = payment
         const order_electricity_id = this.$route.query.order_electricity_id

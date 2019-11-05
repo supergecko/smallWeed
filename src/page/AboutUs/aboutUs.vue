@@ -1,69 +1,62 @@
 <template>
   <div class="about3">
     <div class="block">
-      <el-carousel height="604px"
-                   trigger="click">
-        <el-carousel-item v-for="(src,index) in bannerImg"
-                          :key="index">
-          <img src="../../../static/imgs/banner.png"
-               alt />
-        </el-carousel-item>
-      </el-carousel>
+<!--      <el-carousel height="894px"-->
+<!--                   trigger="click">-->
+<!--        <el-carousel-item v-for="(src,index) in bannerImg"-->
+<!--                          :key="index">-->
+<!--          <img src="../../../static/imgs/banner@2x.jpg"-->
+<!--               alt width="100%" height="100%"/>-->
+<!--        </el-carousel-item>-->
+<!--      </el-carousel>-->
+      <img src="../../../static/imgs/banner@2x.jpg"
+           alt width="100%" height="894px"/>
     </div>
 
     <div class="about">
       <div class="title">
-        <h2 class="h2">关于我们</h2>
+        <h2 class="h2">雷猫矿机</h2>
         <div class="bottom-border"></div>
       </div>
 
       <div class="content">
-        <el-row>
-          <el-col :span="11"
-                  class="content-left">
-            <span class="border-top"></span>
-            <h3 class="h3">雷猫矿机</h3>
-            <p class="p-content">
-              <span>
-                一个为用户提供矿机共享服务的平台，为用户节省了购买、安装、托管矿机的复杂流程，一键下单，即可享受服务。
-                <br />
-
-                <br />区别于市面上的任何矿机共享产品:
-                <br />雷猫矿机平台上用户收益更加透明：真实矿机提供挖矿服务，平台根据用户指示链接指定矿池，再由矿池将数值货币挖矿产出直接分配至用户提供的钱包地址。
-                <br />雷猫矿机的矿机产品选择更为灵活的基础，售后服务优势更为明显； 雷猫矿场提供稳定及优质的托管服务，若因矿场方原因造成设备停机，平台将为用户全额补偿收益。
-                平台选择全球领先矿机厂商设备，深度合作全球一流矿机f2pool.com、BTC.com和AntPool。
-                <br />
-
-                <br />“真实矿机挖矿、矿池直接打款、用户收益透明、服务套餐选择灵活”，雷猫矿机致力于全球用户提供透明、安全、便捷的全球一流的矿机共享服务。
-              </span>
-            </p>
-          </el-col>
-          <el-col :span="13"
-                  class="content-right">
-            <img src="../../../static/imgs/kuangji.png"
-                 alt />
-          </el-col>
-        </el-row>
+        <p class="intro">雷猫商城团队经历3个月的精心打造，于2019年09月正式上线雷猫矿机交易平台。雷猫商城是基于区块链投资者的需求，矿圈内矿机的交易因没有担保规范机制，行业混乱，参差不齐的服务，雷猫商城希望能在行业里树立一个新的体系，完善生态服务。围绕矿业生态的矿场托管服务、增值服务，希望能过雷猫团队的努力，能为矿工们在挖矿的道路上得到品质交易及矿业生态的便捷服务！</p>
+        <h3 class="h3">雷猫商城能为您做什么？</h3>
+        <p class="intro">
+          矿机购买、矿机使用、矿机托管业务、矿机售后保障，雷猫商城为您提供高效、便捷的矿机一站式解决方案，您的需求就是我们的目标。我们为您整合矿圈资源、新款矿机、矿场托管及独立专业运营团队。为您提供：矿机购买+矿机托管+售后保障+推广返佣等，一站式解决方案。
+        </p>
+        <h3 class="h3">矿机销售</h3>
+        <p class="intro">
+          矿机购买、矿机使用、矿机托管业务、矿机售后保障，雷猫商城为您提供高效、便捷的矿机一站式解决方案，您的需求就是我们的目标。我们为您整合矿圈资源、新款矿机、矿场托管及独立专业运营团队。为您提供：矿机购买+矿机托管+售后保障+推广返佣等，一站式解决方案。
+        </p>
+        <h3 class="h3">矿机托管</h3>
+        <p class="intro">
+          规模化部署-集约式管理-低廉电费-电价低廉+规模化管理+运行效率提升+完善的安防 。提供矿机托管服务，矿场按照枯水期额定发电量进行搭建，全年保障供电。雷猫商城三大矿场分别位于云南昭通、云南迪庆、湖南株洲。
+        </p>
+        <h3 class="h3">矿机买卖，优选雷猫商城</h3>
+        <p class="intro">
+          为你提供专业贴心的服务，以不断提高服务质量为己任。 雷猫矿机商城长期服务于比特币矿机相关领域，全力协助矿工与矿商打通销售渠道，并实现 共赢。开创分享、拼团、共赢的全新运营模式。<br/>
+          雷猫矿机商城也许不能为您提供市场最低价，但能给您最好的服务。
+        </p>
+        <img class="c-img" src="../../../static/imgs/mill.jpg" alt="" width="1056" height="548">
       </div>
-    </div>
 
+    </div>
     <div class="relation">
       <div class="title">
         <h2 class="h2">联系方式</h2>
         <div class="bottom-border"></div>
       </div>
       <div class="relation-content">
-        <img width="750px"
-             src="../../../static/imgs/bottom2.png"
-             alt />
+        <img width="546" height="392" src="../../../static/imgs/relation.png" alt />
         <div class="num">
-          <p>
-            <span>电话</span>
-            <br />18144055176(微信同号) &nbsp;&nbsp;&nbsp;林经理
+          <p class="p-num">
+            <span class="way">联系电话</span>
+            <br />18144055176(微信同号) &nbsp;&nbsp;林经理
           </p>
-          <p>
-            <span>邮箱</span>
-            <br />lintingxin@linglu666.cn
+          <p class="p-num">
+            <span class="way">联系邮箱</span>
+            <br />lintingxin@linglu666.com
           </p>
         </div>
       </div>
@@ -142,144 +135,91 @@ export default {
 </script>
 
 <style scoped>
-.about3 {
-  width: 1220px;
-  margin: 0 auto;
-  padding: 20px 0;
-}
-/* .el-carousel__indicator--horizontal{
-    width: 16px;
-    height: 16px;
-    background: rgba(89, 126, 247, 1);
-    border-radius: 50%;
+  .about3 {
+    width: 100%;
+    margin: 0 auto;
   }
-  .el-carousel__button {
-    width: 16px;
+  /*.el-carousel__indicator--horizontal{*/
+  /*    width: 16px;*/
+  /*    height: 16px;*/
+  /*    background: rgba(89, 126, 247, 1);*/
+  /*    border-radius: 50%;*/
+  /*  }*/
+  /*  .el-carousel__button {*/
+  /*    width: 16px;*/
+  /*    height: 16px;*/
+  /*    background: rgba(89, 126, 247, 1);*/
+  /*    border-radius: 50%;*/
+  /*  }*/
+  .about,
+  .relation {
+    width: 100%;
+    text-align: center;
+  }
+  .title {
+    display: inline-block;
+    margin: 103px auto 60px;
+    text-align: center;
+  }
+  .bottom-border {
+    width: 60px;
+    height: 8px;
+    background: rgba(81, 78, 81, 1);
+    margin: 22px auto 0;
+  }
+  .h2 {
+    font-size: 30px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: rgba(60, 58, 60, 1);
+  }
+  .content {
+    width: 1056px;
+    margin: 0 auto;
+    text-align: left;
+    line-height: 25px;
+    font-family: Microsoft YaHei;
+  }
+  .content .intro{
+    margin-bottom: 30px;
+    font-size: 16px;
+    color: rgba(60, 58, 60, .7);
+  }
+  .content .h3{
+    font-size: 16px;
+    font-family: Microsoft YaHei;
+    font-weight: bolder;
+    color: rgba(60,58,60,1);
+    margin: 5px 0;
+  }
+  .content .c-img{
+    display: block;
+    margin: 0 auto;
+  }
+  .relation-content{
+    position: relative;
+    width: 1056px;
+    margin: 0 auto 139px;
+    text-align: left;
+  }
+  .relation-content .num{
+    position: absolute;
+    top: 94px;
+    left: 722px;
+    font-size: 18px;
+    line-height: 38px;
+  }
+  .num .p-num{
+    margin-bottom: 36px;
+  }
+  .relation-content .num .way:before{
+    content: '';
+    display: inline-block;
+    width: 4px;
     height: 16px;
-    background: rgba(89, 126, 247, 1);
-    border-radius: 50%;
-  } */
-.about,
-.relation {
-  width: 100%;
-  text-align: center;
-}
-.title {
-  display: inline-block;
-  margin: 77px auto;
-  text-align: center;
-  margin-bottom: 103px;
-}
-.bottom-border {
-  width: 60px;
-  height: 8px;
-  background: rgba(81, 78, 81, 1);
-  margin: 22px auto 0;
-}
-.h2 {
-  font-size: 30px;
-  font-family: Microsoft YaHei;
-  font-weight: 400;
-  color: rgba(60, 58, 60, 1);
-}
+    margin-right: 5px;
+    background-color: #659BF4FF;
+  }
 
-.content {
-  padding: 0 118px;
-}
-.content-left {
-  padding: 17px 0;
-}
-.content-left::before {
-  display: block;
-  content: "";
-  width: 52px;
-  height: 1px;
-  background: rgba(60, 58, 60, 1);
-}
-.h3 {
-  margin-top: 35px;
-  width: 96px;
-  height: 24px;
-  font-size: 24px;
-  font-family: Microsoft YaHei;
-  font-weight: bold;
-  color: rgba(60, 58, 60, 1);
-}
-.p-content {
-  margin-top: 80px;
-  text-align: left;
-  color: #3c3a3c;
-  font-size: 16px;
-  line-height: 25px;
-  /* font-family: MicrosoftYaHeiLight; */
-}
-.content-right {
-  text-align: right;
-}
 
-.relation .title {
-  margin-top: 187px;
-  margin-bottom: 100px;
-}
-.relation {
-  margin-bottom: 173px;
-}
-.relation-content {
-  padding: 0 118px;
-  text-align: left;
-  position: relative;
-}
-.num {
-  width: 426px;
-  height: 292px;
-  background: rgba(232, 238, 246, 1);
-  position: absolute;
-  top: 70px;
-  right: 118px;
-}
-.num p {
-  color: #3c3a3c;
-  font-size: 20px;
-  margin: 66px 0 0 84px;
-  line-height: 25px;
-}
-.num span {
-  font-weight: 600;
-  padding: 10px 0;
-}
-.bottom {
-  width: 100%;
-  height: 118px;
-  background: url("../../../static/imgs/bottom.png");
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.wrap {
-  list-style: none;
-}
-.wrap a {
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 300;
-  color: #fff;
-  margin-left: 10px;
-  border-right: 2px rgba(231, 229, 229, 1) solid;
-  padding-right: 10px;
-}
-.wrap a:hover {
-  color: #5079d9;
-}
-.wrap li {
-  float: left;
-}
-.wrap li:last-child a {
-  border: none;
-}
-.bottom p {
-  font-size: 12px;
-  font-weight: 300;
-  color: #fff;
-}
 </style>

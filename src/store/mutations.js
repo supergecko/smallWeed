@@ -39,25 +39,25 @@ export default {
     setItem({
       name: 'userName',
       value: info.info.mobile,
-      expires: 86400000,
+      expires: 21600000,
       startTime: Date.parse(new Date())
     })
     setItem({
       name: 'userToken',
       value: info.info.token,
-      expires: 86400000,
+      expires: 21600000,
       startTime: Date.parse(new Date())
     })
     setItem({
       name: 'identityId',
       value: info.info.identity,
-      expires: 86400000,
+      expires: 21600000,
       startTime: Date.parse(new Date())
     })
     setItem({
-      name: 'userID',
-      value: info.info.user_id,
-      expires: 86400000,
+      name: 'userIDPC',
+      value: info.info.mobile,
+      expires: 21600000,
       startTime: Date.parse(new Date())
     })
   },

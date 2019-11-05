@@ -250,7 +250,7 @@
     methods: {
       // 是否身份信息验证
       async _identityAuthenticationExist () {
-        const user_id = await getItem('userID')
+        const user_id = await getItem('userIDPC')
         const timestamp = await Date.parse(new Date()) / 1000
         const sign = await this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}
@@ -298,7 +298,7 @@
         const mobile = telPhone
         const face = this.IdCardFaceImg
         const back = this.IdCardBackImg
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const timestamp = Date.parse(new Date()) / 1000
         const sign = this.$md5(`${user_id}__${realname}__${idcard}__${mobile}__${face}__${back}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, realname, idcard, mobile, face, back, timestamp, sign}
@@ -374,7 +374,7 @@
           background: 'rgba(0, 0, 0, 0.7)',
           fullscreen: true
         })
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const coin_id = 1
         const timestamp = Date.parse(new Date()) / 1000
         const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__elseleimaohasjer2860`)
@@ -405,7 +405,7 @@
           },
           inputErrorMessage: '输入不能为空'
         }).then(({value}) => {
-          const user_id = getItem('userID')
+          const user_id = getItem('userIDPC')
           const address = value
           const coin_id = 1
           const timestamp = Date.parse(new Date()) / 1000
@@ -440,7 +440,7 @@
             const city = CodeToText[receivingArea[1]]
             const district = CodeToText[receivingArea[2]]
             const town = ''
-            const user_id = getItem('userID')
+            const user_id = getItem('userIDPC')
             const timestamp = Date.parse(new Date()) / 1000
             const sign = this.$md5(`${user_id}__${province}__${city}__${district}__${town}__${consignee}__${mobile}__${zipcode}__${address}__${timestamp}__elseleimaohasjer2860`)
             let params = {user_id, province, city, district, town, consignee, mobile, zipcode, address, timestamp, sign}
@@ -464,7 +464,7 @@
       },
       // 获取用户收货地址
       _getUserAddress () {
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const timestamp = Date.parse(new Date()) / 1000
         const sign = this.$md5(`${user_id}__${timestamp}__elseleimaohasjer2860`)
         let params = {user_id, timestamp, sign}

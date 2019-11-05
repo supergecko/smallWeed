@@ -12,7 +12,7 @@
           <p class="head-describe">
             <span>对于我们的读者，请在下面查阅媒体关于雷猫矿机最新的文章报道</span>
             <br />
-            <span>对于资讯媒体，请通过lintingxin@linglu666.cn联系我们</span>
+            <span>对于资讯媒体，请通过lintingxin@linglu666.com联系我们</span>
           </p>
         </div>
       </div>

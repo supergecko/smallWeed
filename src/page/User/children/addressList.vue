@@ -82,7 +82,7 @@
           background: 'rgba(0, 0, 0, 0.7)',
           fullscreen: true
         })
-        const user_id = getItem('userID')
+        const user_id = getItem('userIDPC')
         const coin_id = 1
         const timestamp = Date.parse(new Date()) / 1000
         const sign = this.$md5(`${user_id}__${coin_id}__${timestamp}__elseleimaohasjer2860`)
@@ -113,7 +113,7 @@
           },
           inputErrorMessage: '输入不能为空'
         }).then(({value}) => {
-          const user_id = getItem('userID')
+          const user_id = getItem('userIDPC')
           const address = value
           const coin_id = 1
           const timestamp = Date.parse(new Date()) / 1000
