@@ -5,7 +5,7 @@
         <el-col :span="5" >排名</el-col>
         <el-col :span="9">账号</el-col>
         <el-col :span="9">累计贡献值</el-col>
-        <el-col :span="9">预计瓜分雷猫积分</el-col>
+        <el-col :span="9">预计瓜分雷猫积分<img style="line-height: 30px;position: relative;left:15px;top:5px;" src="/static/images/thunder_coin.png"/> </el-col>
       </el-row>
       <el-row class="tableHeader" v-if="all_team_order">
         <el-col :span="12">账号</el-col>
@@ -34,8 +34,8 @@
                   :style="{'background': (index%2==0 ? 'rgb(2,25,70)':'')}">
             <el-col :span="5">{{item.rank}}</el-col>
             <el-col :span="9">{{item.mobile}}</el-col>
-            <el-col :span="9">￥{{item.all_results}}</el-col>
-            <el-col :span="9">￥{{item.get_thundercat_coin}}</el-col>
+            <el-col :span="9">{{item.all_results}}</el-col>
+            <el-col :span="9">{{item.get_thundercat_coin}}</el-col>
           </el-row>
         </el-row>
       </el-row>
@@ -55,7 +55,7 @@
         <el-row v-for="(item,index) in all_team_order" :key="index">
           <el-row class="tableHeader tableList" :style="{'background': (index%2==0 ? 'rgb(2,25,70)':'')}">
             <el-col :span="12">{{item.mobile}}</el-col>
-            <el-col :span="12">￥{{item.self_result}}</el-col>
+            <el-col :span="12">{{item.self_result}}</el-col>
           </el-row>
         </el-row>
       </el-row>

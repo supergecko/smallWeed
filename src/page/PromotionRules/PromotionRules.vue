@@ -23,7 +23,7 @@
             <el-row class="bt1TextCommon" style="margin-bottom: 29px">雷猫合伙人权益：</el-row>
             <el-row style="margin-bottom: 19px">1、可获得直接通过合伙人专属注册链接注册的用户订单金额分佣，分佣比例如下：</el-row>
             <el-row style="margin-bottom: 13px">① 矿机设备订单金额的<span style="color: #FE3E30">10%</span></el-row>
-            <el-row>② 电费缴纳订单金额的<span style="color: #FE3E30">2%</span></el-row>
+            <el-row>② 电费缴纳订单金额的<span style="color: #FE3E30">5%</span></el-row>
 
             <el-row style="margin-bottom: 19px;margin-top: 38px">2、可获得通过名下用户及合伙人的专属注册链接注册的用户订单金额分佣，分佣比例如下：</el-row>
             <el-row style="margin-bottom: 13px">① 矿机设备订单金额的<span style="color: #FE3E30">2%</span></el-row>
@@ -35,18 +35,18 @@
                 style="width: 702px; height: 348px"
                 src="../../../static/extension/fy1.png"
                 fit="fill"></el-image>
-              <el-row class="or1t">订单金额 10%</el-row>
-              <el-row class="or2t">订单金额 2%</el-row>
-              <el-row class="or3t">订单金额 5%</el-row>
+              <el-row class="or1t">设备订单 10%</el-row>
+              <el-row class="or2t">设备订单 2%</el-row>
+              <el-row class="or3t">设备订单 5%</el-row>
             </el-row>
             <el-row style="display: flex;justify-content: center;align-items: center;position: relative;margin-top: 85px">
               <el-image
                 style="width: 702px; height: 348px"
                 src="../../../static/extension/fy2.png"
                 fit="fill"></el-image>
-              <el-row class="or1t">订单金额 5%</el-row>
-              <el-row class="or2t">订单金额 2%</el-row>
-              <el-row class="or3t">订单金额 1%</el-row>
+              <el-row class="or1t">电费订单 5%</el-row>
+              <el-row class="or2t">电费订单 2%</el-row>
+              <el-row class="or3t">电费订单 1%</el-row>
             </el-row>
           </el-row>
         </el-row>
