@@ -15,7 +15,7 @@
           <p class="interior-left-p">Inside the mine</p>
         </div>
         <div class="interior-right">
-          <img src="../../../static/imgs/mine2.png"
+          <img src="../../../static/imgs/mine2.jpg"
                alt />
         </div>
       </div>
@@ -29,12 +29,12 @@
           <p class="external-left-p">Mines outside</p>
         </div>
         <div class="external-right">
-          <img src="../../../static/imgs/mine3.png"
+          <img src="../../../static/imgs/mine3.jpg"
                alt />
           <img class="img3"
-               width="368"
+               width="400"
                height="260"
-               src="../../../static/imgs/mine4.jpg"
+               src="../../../static/imgs/mine5.jpg"
                alt />
           <span class="external-span">The mine equipmen</span>
         </div>
@@ -200,18 +200,18 @@ export default {
 }
 .external-right {
   position: relative;
-  margin-left: 149px;
+  margin-left: 30px;
 }
 .img3 {
   position: absolute;
   top: 151px;
-  left: 66px;
+  left: 154px;
 }
 .external-span {
   position: absolute;
   top: 28px;
-  left: 285px;
-  color: #dbdddf;
+  left: 450px;
+  color: #CCCCCC;
   font-size: 24px;
   line-height: 36px;
 }
