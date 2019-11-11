@@ -101,9 +101,17 @@
               <div class="goodItemMiddle" style="font-size: 14px;">
                 月化收益:{{item.income}} BTC
               </div>
+
+              <div v-if="i == 0" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：25000.00元</div>
+              <div v-if="i == 1" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：17500.00元</div>
+              <div v-if="i == 2" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：7400.00元</div>
+              <div v-if="i == 3" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：7600.00元</div>
               <div class="goodItemMiddle" style="font-size: 14px;">
-                团购价格:<span style="color:red;font-weight:bold">{{item.shop_price}}</span>元
+                <span style="color:red;font-weight:bold;font-size: 14px;">狂欢价格:</span>
+                <span style="color:red;font-weight:bold;font-size: 20px;">{{item.shop_price}}</span>
+                <span style="color:red;font-weight:bold;font-size: 14px;">元</span>
               </div>
+              <br>
               <div class="goodItemFooter">
                 <el-progress :percentage=item.rate style="width:182px" :format="format"></el-progress>
                 <el-button type="primary" :disabled="item.on_sale===1? false: true" style="width:214px;margin-top:16px;" @click="openOrderList(share_activity_id, item.goods_id)">
@@ -643,13 +651,14 @@
   }
   .goodItem{
     width:274px;
-    height:307px;
+    height:320px;
     background:rgba(255,255,255,1);
     border-radius:4px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 15px;
   }
   .goodItemHead{
     height: 92px;
@@ -992,7 +1001,7 @@
     text-align: center;
   }
   .middleFooterLeftItem .el-image{
-    
+
     margin-top: 10px;
   }
   .middleFooterWarp{

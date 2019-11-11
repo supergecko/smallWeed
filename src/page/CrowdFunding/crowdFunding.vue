@@ -81,10 +81,22 @@
               <div class="goodItemMiddle" style="font-size: 14px;">
                 月化收益:{{item1.income}} BTC
               </div>
+              <div v-if="j == 0 & item1.on_sale===1" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：25000.00元</div>
+              <div v-if="j == 1 & item1.on_sale===1" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：17500.00元</div>
+              <div v-if="j == 2 & item1.on_sale===1" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：7400.00元</div>
+              <div v-if="j == 3 & item1.on_sale===1" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：7600.00元</div>
+<!--              <div class="goodItemMiddle" style="font-size: 14px;">-->
+<!--                团购价格:<span style="color:red;font-weight:bold">{{item1.shop_price}}</span>元-->
+<!--              </div>-->
+
               <div class="goodItemMiddle" style="font-size: 14px;">
-                团购价格:<span style="color:red;font-weight:bold">{{item1.shop_price}}</span>元
+                <span v-if="item1.on_sale===1" style="color:red;font-weight:bold;font-size: 14px;">狂欢价格:</span>
+                <span v-if="item1.on_sale===1" style="color:red;font-weight:bold;font-size: 20px;">{{item1.shop_price}}</span>
+                <span v-if="item1.on_sale===1" style="color:red;font-weight:bold;font-size: 14px;">元<br></span>
+                <span v-if="item1.on_sale!=1">团购价格:<span style="color:red;font-weight:bold">{{item1.shop_price}}</span>元</span>
               </div>
               <div class="goodItemFooter">
+                <br>
                 <el-progress :percentage=item1.rate  :format="format" style="width:182px"></el-progress>
                 <el-button type="primary" :disabled="item1.on_sale===1? false: true" style="width:214px;margin-top:16px;" @click="openOrderList(item.share_activity_id, item1.goods_id)">
                   {{item1.on_sale===0? '即将补货': item1.on_sale===1?'立即抢购':'抢购结束'}}
@@ -306,13 +318,14 @@
   }
   .goodItem{
     width:274px;
-    height:307px;
+    height:320px;
     background:rgba(255,255,255,1);
     border-radius:4px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 15px;
   }
   .goodItemHead{
     height: 92px;
