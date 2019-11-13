@@ -30,10 +30,10 @@ module.exports = {
     proxyTable: {
       '/api1/**': {
         // target: 'http://127.0.0.1:3333',  // 请求本地 需要clone node-api项目
-        target: 'http://www.dterdal.com',// 测试环境
+        // target: 'http://www.dterdal.com',// 测试环境
         // target: 'http://www.thundercat.com',// 本地环境
-        // target: 'http://www.ileriweb.com',// 线上环境
-        // target: 'https://www.leimaominer.com',// 线上环境
+        // target: 'http://www.ileriweb.com',// 线上环境(废弃)
+        target: 'https://www.leimaominer.com',// 线上环境(启动)
         changeOrigin: true,
         pathRewrite: {
           '^/api1': '/'

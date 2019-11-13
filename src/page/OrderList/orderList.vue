@@ -644,14 +644,14 @@
           this.paymentInputFlag = false
           this.electricityFalg = false
           this.totalElectricity = 0
-          this.totalCase = this.initMinePrice * this.ruleForm.num
+          this.totalCase = (this.initMinePrice * this.ruleForm.num) - this.amountOfCoupon
           this.totalCase = parseFloat(this.totalCase).toFixed(2)
         } else {
           this.paymentInputFlag = true
           this.electricityFalg = true
           this.totalElectricity = this.initTotalElectricity
           this.totalCase = this.initMinePrice
-          this.totalCase = (parseFloat(this.totalCase) + parseFloat(this.totalElectricity)) * this.ruleForm.num
+          this.totalCase = ((parseFloat(this.totalCase) + parseFloat(this.totalElectricity)) * this.ruleForm.num) - this.amountOfCoupon
           this.totalCase = parseFloat(this.totalCase).toFixed(2)
         }
       },
