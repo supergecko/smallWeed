@@ -47,11 +47,15 @@
                   </li>
                   <li>
                     <router-link to="/news"
-                                 :class="{classA: this.$route.path=='/news'? true:false}">新闻</router-link>
+                                 :class="{classA: this.$route.path=='/news'? true:false}">资讯</router-link>
                   </li>
                   <li>
                     <router-link to="/aboutUs"
                                  :class="{classA: this.$route.path=='/aboutUs'? true:false}">关于我们</router-link>
+                  </li>
+                  <li>
+                    <router-link to="/findPartner"
+                                 :class="{classA: this.$route.path=='/findPartner'? true:false}">合伙人招募</router-link>
                   </li>
                 </div>
                 <div class="userLoginText" :class="{userLoginTextFixed:st}">
@@ -157,7 +161,8 @@ export default {
         this.$route.path === '/mineField' ||
         this.$route.path === '/PromotionRules' ||
         this.$route.path === '/Calculator' ||
-        this.$route.path === '/store') {
+        this.$route.path === '/store' ||
+        this.$route.path === '/findPartner') {
         // 计算是否吸顶
         if (this.showNav) {
           let st = document.documentElement.scrollTop || document.body.scrollTop
@@ -791,7 +796,7 @@ header {
     display: flex;
     align-items: center;
     height: 100%;
-    width: 800px;
+    width: 900px;
     li:first-child {
       padding-left: 0;
       a {

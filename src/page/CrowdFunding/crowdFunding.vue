@@ -10,13 +10,22 @@
                     <span>预计开始挖矿时间</span>
                     <el-tag type="warning">{{item.dig_time}}</el-tag>
                   </div>
-                  <div class="downTime" style="font-size:30px;right:140px;" v-if="item.status===2">
+                  <div class="downTime" style="font-size:30px;right:80px;top:60px;" v-if="item.status===2">
                     团购结束
                   </div>
                   <div class="downTime" v-else>
-                    距离本轮团购时间还有
-                    <span>{{item.rest_day}}</span>
-                    <span>天</span>
+                    <div class="downTime_title">
+                      距离本轮团购结束时间还有
+                    </div>
+<!--                    <div class="downDate">-->
+<!--                      <span style="font-size: 6em;">{{item.rest_day}}</span><span>天</span>-->
+<!--                    </div>-->
+                    <div class="daojishi">
+                      <span>{{item.rest_day}}</span>天
+                      <span>{{h}}</span>时
+                      <span>{{m}}</span>分
+                      <span>{{s}}</span>秒
+                    </div>
                   </div>
               </div>
               <div class="contentMiddle">
@@ -120,7 +129,11 @@
         seoTitle: '',
         seoMateName: '',
         seoMateContent1: '',
-        seoMateContent2: ''
+        seoMateContent2: '',
+        d: '',
+        h: '',
+        m: '',
+        s: ''
       }
     },
     metaInfo () {
@@ -186,10 +199,24 @@
             this.$message.error(res.data.msg)
           }
         })
+      },
+      countTime () {
+        var date = new Date()//
+        var now = date.getTime()
+        var endDate = new Date('2100-1-1 23:59:59')
+        var end = endDate.getTime()
+        var leftTime = end - now
+        if (leftTime >= 0) {
+          this.h = Math.floor((leftTime / 1000 / 60 / 60) % 24)
+          this.m = Math.floor((leftTime / 1000 / 60) % 60)
+          this.s = Math.floor((leftTime / 1000) % 60)
+        }
+        setTimeout(this.countTime, 1000)
       }
     },
     mounted () {
       this._goodsList()
+      this.countTime()
     },
     created () {
 
@@ -292,12 +319,22 @@
     line-height: 30px;
   }
   .downTime{
+    width:360px;
+    height:200px;
     position: absolute;
-    top: 69px;
-    right: 80px;
+    top:0px;
+    right: 0px;
     color: black;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 24px;
+    text-align: center;
+    padding: 10px;
+  }
+  .downTime_title{
+    text-align: left;
+    margin-top: 45px;
+    margin-left: 20px;
+    color: #2E6CB6;
   }
   .downTime span{
     display: inline-block;
@@ -307,6 +344,25 @@
     margin-right: 4px;
     color: red;
     font-size: 35px;
+  }
+  .downDate{
+    margin-top: 45px;
+  }
+  .daojishi{
+    width: 100%;
+    height:35px;
+    margin-top: 20px;
+    color : #2E6CB6;
+    font-size: 17px;
+    color:#2E6CB6;
+  }
+  .daojishi span{
+    width:45px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: #2E6CB6;
+    color: #ffffff;
+    line-height: 35px;
   }
   .lmbGoodsWarp{
     margin-top: 22px;

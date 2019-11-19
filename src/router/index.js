@@ -6,6 +6,7 @@ const UserLogin = resolve => require(['/page/UserLogin/userLogin'], resolve)
 const Home = resolve => require(['/page/Home/home'], resolve)
 const MineField = resolve => require(['/page/MineField/mineField'], resolve)
 const AboutUs = resolve => require(['/page/AboutUs/aboutUs'], resolve)
+const FindPartner = resolve => require(['/page/findPartner/findPartner'], resolve)
 const ServiceAgreement = resolve => require(['/page/ServiceAgreement/serviceAgreement'], resolve)
 const OrderList = resolve => require(['/page/OrderList/orderList'], resolve)
 const CrowdFunding = resolve => require(['/page/CrowdFunding/crowdFunding'], resolve)
@@ -51,6 +52,7 @@ export default new Router({
         { path: 'orderList', name: 'orderList', component: OrderList },
         { path: 'mineField', component: MineField },
         { path: 'aboutUs', component: AboutUs },
+        { path: 'findPartner', component: FindPartner },
         { path: 'serviceAgreement', component: ServiceAgreement },
         { path: '/news', name: 'news', component: news },
         { path: '/newDetails', name: 'newDetails', component: newDetails },
