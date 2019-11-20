@@ -111,13 +111,8 @@
               <div class="goodItemMiddle" style="font-size: 14px;">
                 月化收益:{{item.income}} BTC
               </div>
-
-              <div v-if="i == 0" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：25000.00元</div>
-              <div v-if="i == 1" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：17500.00元</div>
-              <div v-if="i == 2" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：7400.00元</div>
-              <div v-if="i == 3" class="goodItemMiddle" style=" text-decoration:line-through" >团购价格：7600.00元</div>
               <div class="goodItemMiddle" style="font-size: 14px;">
-                <span style="color:red;font-weight:bold;font-size: 14px;">狂欢价格:</span>
+                <span style="color:red;font-weight:bold;font-size: 14px;">团购价格:</span>
                 <span style="color:red;font-weight:bold;font-size: 20px;">{{item.shop_price}}</span>
                 <span style="color:red;font-weight:bold;font-size: 14px;">元</span>
               </div>

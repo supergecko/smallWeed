@@ -41,14 +41,7 @@
       </div>
     </div>
     <div class="picWall">
-      <div class="pic_1"></div>
-      <div class="pic_2"></div>
-      <div class="pic_3"></div>
-      <div class="pic_4"></div>
-      <div class="pic_5"></div>
-      <div class="pic_6"></div>
-      <div class="pic_7"></div>
-      <div class="pic_8"></div>
+      <img src="/static/aboutUs/zpq.jpg"/>
     </div>
     <div class="relation">
       <div class="title">
@@ -231,84 +224,5 @@ export default {
 .picWall{
   width: 100%;
   height:900px;
-
 }
-  .pic_1{
-    float: left;
-    position: relative;
-    width: 20%;
-    height:60%;
-    background-image: url("/static/aboutUs/pic_1.jpg");
-    background-size:100% 100%;
-  }
-  .pic_2{
-    float: left;
-    position: relative;
-    margin-top: 0px;
-    width: 40%;
-    height:30%;
-    background-image: url("/static/aboutUs/pic_2.jpg");
-    background-size:100% 100%;
-  }
-  .pic_3{
-    float: left;
-    position: relative;
-    top:30%;
-    left: -40%;
-    width: 40%;
-    height:30%;
-    background-image: url("/static/aboutUs/pic_3.jpg");
-    background-size:100% 100%;
-  }
-  .pic_4{
-    float: left;
-    position: relative;
-    left: 40%;
-    top:-30%;
-    width: 20%;
-    height:60%;
-    background-image: url("/static/aboutUs/pic_4.jpg");
-    background-size:100% 100%;
-  }
-  .pic_5{
-    float: right;
-    position: relative;
-    top:-30%;
-    width: 20%;
-    height:60%;
-    background-image: url("/static/aboutUs/pic_5.jpg");
-    background-size:100% 100%;
-  }
-  .pic_6{
-    float: left;
-    position: relative;
-    left: -40%;
-    top:30%;
-    width: 30%;
-    height:40%;
-    background-image: url("/static/aboutUs/pic_6.jpg");
-    background-size:100% 100%;
-  }
-  .pic_7{
-    float: left;
-    position: relative;
-    left: -10%;
-    top:-10%;
-    width: 40%;
-    height:40%;
-    background-image: url("/static/aboutUs/pic_7.jpg");
-    background-size:100% 100%;
-  }
-  .pic_8{
-    float: right;
-    position: relative;
-    /*left: -10%;*/
-    top:-50%;
-    width: 30%;
-    height:40%;
-    background-image: url("/static/aboutUs/pic_8.jpg");
-    background-size:100% 100%;
-  }
-
-
 </style>
