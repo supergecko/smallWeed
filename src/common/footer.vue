@@ -100,14 +100,44 @@
           </div>
         </el-col>
       </el-col>
+
+
+
+      <el-dialog
+        title="雷猫商城APP下载"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose"
+        :lock-scroll="false">
+        <div class="downModel">
+          <div class="mobile">
+            <div class="down1"></div>
+            <br/>
+            <p>
+              <span><img src="/static/svg/iOS.svg"/> </span>&nbsp;<strong>IOS</strong>&nbsp;&nbsp;|&nbsp;&nbsp;
+              <span><img src="/static/svg/android.svg"/> </span>&nbsp;<strong>Android</strong>
+            </p>
+          </div>
+          <div></div>
+<!--          <div class="mobile">-->
+<!--            <div class="down2"></div>-->
+<!--            <br/>-->
+<!--            <p><span><img src="/static/svg/android.svg"/> </span>&nbsp;<strong>Android</strong></p>-->
+<!--          </div>-->
+        </div>
+        <span slot="footer" class="dialog-footer">
+<!--          <el-button @click="dialogVisible = false">取 消</el-button>-->
+<!--          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
+        </span>
+      </el-dialog>
+
       <!--  联系我们-->
       <div class="connectUs" ref="connectUs">
-<!--        <div class="llgQQ" @mouseenter="enter(1)" @mouseleave="leave(0)" ref="llgQQ"></div>-->
         <div class="llgWX" @mouseenter="enter(2)" @mouseleave="leave(0)" ref="llgWX"></div>
         <div class="llgTel" @mouseenter="enter(3)" @mouseleave="leave(0)" ref="llgWX"></div>
+        <div class="llgLmApp" type="button" @click="dialogVisible = true"></div>
       </div>
 <!--      二维码-->
-<!--      <div class="llgQR" v-if="qrType == 1" style="border:1px solid red;"></div>-->
       <div class="llgQR" v-if="qrType == 2"  style="background-image: url('/static/images/lmkf.jpg');background-size:100%;"></div>
       <div class="llgTelInfo" v-if="qrType == 3"  >
         181 - 4405 - 5176  林经理
@@ -123,7 +153,8 @@ export default {
   data () {
     return {
       footerRate: getItem('footRate'),
-      qrType: 0
+      qrType: 0,
+      dialogVisible: false
     }
   },
   methods: {
@@ -144,15 +175,26 @@ export default {
     },
 
     enter (par) {
+      if (par === 1) {
+        this.$dialog.confirm('Please confirm to continue').then(function () {
+          console.log('111111111111111')
+        }).catch(function () {
+          console.log('222222222222222')
+        })
+      }
       this.qrType = par
     },
-
     leave (par) {
       this.qrType = par
     }
   },
   created () {
     this._homePage()
+  },
+  handleClose (done) {
+    this.$confirm('确认关闭?').then(_ => {
+      done()
+    }).catch(_ => {})
   }
 }
 </script>
@@ -246,7 +288,7 @@ export default {
   left: unset;
   right: 1%;
   top:unset;
-  bottom: 35%;
+  bottom: 42%;
   z-index: 2019;
   }
 .llgWX{
@@ -261,14 +303,14 @@ export default {
   background-image: url("/static/images/icon-tel.png");
   background-size:100%;
 }
-  .llgQR{
+.llgQR{
     width:200px;
     height:200px;
     position: fixed;
     left: unset;
     right: 4%;
     top:unset;
-    bottom: 35%;
+    bottom: 38%;
     z-index: 2019;
   }
 .llgTelInfo{
@@ -278,7 +320,7 @@ export default {
   left: unset;
   right: 4.3%;
   top:unset;
-  bottom: 37.8%;
+  bottom: 45%;
   z-index: 2019;
   background: #FFFFFF;
   border-radius: 25px;
@@ -288,4 +330,35 @@ export default {
   color: #1a1a1a;
   box-shadow:darkgrey 2px 2px 2px 2px ;
 }
+.downModel{
+  height: 250px;
+  text-align: center;
+}
+.mobile{
+  width: 100%;
+  height:300px;
+  float: left;
+}
+.down1{
+  width: 200px;
+  height:200px;
+  background: url("/static/images/app.jpg") no-repeat;
+  background-size: 100%;
+  margin: 0px auto;
+}
+.mobile p{
+  width: 100%;
+  font-size: 20px;
+  line-height: 40px;
+}
+.mobile img{
+  width: 30px;
+  height:30px;
+  }
+.llgLmApp{
+    width: 80px;
+    height:80px;
+    background-image: url("/static/images/icon-app.png");
+    background-size:100%;
+  }
 </style>
