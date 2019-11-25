@@ -18,19 +18,19 @@
 <!--          src="../../../static/imgs/passed.png"-->
 <!--          fit="fill"></el-image>-->
         <el-row style="height: 140px;display: flex;flex-direction: column;justify-content: space-between;" v-show="!IdCardImgVerify">
-          <el-row style="width:950px;">
+          <el-row style="width:850px;">
             <el-col :span="3">状态</el-col>
             <el-col :span="21">{{loginArry.user_authentication_des}}</el-col>
           </el-row>
-          <el-row style="width:950px">
+          <el-row style="width:850px">
             <el-col :span="3">姓名</el-col>
             <el-col :span="21">{{loginArry.realname}}</el-col>
           </el-row>
-          <el-row style="width:950px">
+          <el-row style="width:850px">
             <el-col :span="3">手机号</el-col>
             <el-col :span="21">{{loginArry.mobile}}</el-col>
           </el-row>
-          <el-row style="width:950px">
+          <el-row style="width:850px">
             <el-col :span="3">身份证号</el-col>
             <el-col :span="21">{{loginArry.idcard}}</el-col>
           </el-row>

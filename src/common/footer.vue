@@ -125,17 +125,30 @@
 <!--            <p><span><img src="/static/svg/android.svg"/> </span>&nbsp;<strong>Android</strong></p>-->
 <!--          </div>-->
         </div>
-        <span slot="footer" class="dialog-footer">
-<!--          <el-button @click="dialogVisible = false">取 消</el-button>-->
-<!--          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
-        </span>
       </el-dialog>
+<!--      下载app-->
+      <div class="appDown" v-if="appDownShow == true" v-on:click="greet(0)">
+        <p> 雷</p>
+        <p> 猫</p>
+        <p> A</p>
+        <p> P</p>
+        <p> P</p>
+        <p> 下</p>
+        <p> 载</p>
+      </div>
+      <el-col class="down_con" v-if="appConShow == true">
+        <span class="close_down" type="button" v-on:click="greet(1)"><img src="/static/images/icon_del.png"></span>
+        <p>雷猫APP下载</p>
+        <p style="width:124px;height:124px;"><img src="/static/images/app.jpg" style="width: 124px;"> </p>
+        <p class="phoneMsg" style="width:170px;height:30px;"><span><img src="/static/svg/iOS.svg"/> </span>&nbsp;<strong>IOS</strong>&nbsp;&nbsp;|&nbsp;&nbsp;
+          <span><img src="/static/svg/android.svg"/> </span>&nbsp;<strong>Android</strong></p>
+      </el-col>
 
       <!--  联系我们-->
       <div class="connectUs" ref="connectUs">
         <div class="llgWX" @mouseenter="enter(2)" @mouseleave="leave(0)" ref="llgWX"></div>
         <div class="llgTel" @mouseenter="enter(3)" @mouseleave="leave(0)" ref="llgWX"></div>
-        <div class="llgLmApp" type="button" @click="dialogVisible = true"></div>
+<!--        <div class="llgLmApp" type="button" @click="dialogVisible = true"></div>-->
       </div>
 <!--      二维码-->
       <div class="llgQR" v-if="qrType == 2"  style="background-image: url('/static/images/lmkf.jpg');background-size:100%;"></div>
@@ -154,7 +167,9 @@ export default {
     return {
       footerRate: getItem('footRate'),
       qrType: 0,
-      dialogVisible: false
+      dialogVisible: false,
+      appDownShow: false,
+      appConShow: true
     }
   },
   methods: {
@@ -175,17 +190,19 @@ export default {
     },
 
     enter (par) {
-      if (par === 1) {
-        this.$dialog.confirm('Please confirm to continue').then(function () {
-          console.log('111111111111111')
-        }).catch(function () {
-          console.log('222222222222222')
-        })
-      }
       this.qrType = par
     },
     leave (par) {
       this.qrType = par
+    },
+    greet (par) {
+      if (par === 0) {
+        this.appDownShow = false
+        this.appConShow = true
+      } else {
+        this.appDownShow = true
+        this.appConShow = false
+      }
     }
   },
   created () {
@@ -360,5 +377,62 @@ export default {
     height:80px;
     background-image: url("/static/images/icon-app.png");
     background-size:100%;
+  }
+.appDown{
+  width: 74px;
+  height:180px;
+  border-color: #606266;
+  position: fixed;
+  left: 1%;
+  right:unset;
+  top:unset;
+  bottom: 42%;
+  z-index: 2019;
+  background: url("/static/images/beiban.png") no-repeat;
+  font-size:16px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  color:rgba(102,102,102,1);
+  padding-top: 15px;
+  padding-left: 30px;
+  }
+  .down_con{
+    width:218px;
+    height:258px;
+    position: fixed;
+    left: 1%;
+    right:unset;
+    top:unset;
+    bottom: 42%;
+    z-index: 2019;
+    padding: 20px;
+    align:center;
+    color:#000000;
+    background-color: #ffffff;
+    border-radius: 30px;
+  }
+  .close_down{
+    width:20px;
+    height:20px;
+    float: right;
+    line-height: 20px;
+  }
+  .down_con p{
+    width:100px;
+    height:17px;
+    font-size: 16px;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height:30px;
+    margin: 15px auto;
+  }
+  .phoneMsg {
+    font-size: 16px;
+    color:rgba(102,102,102,1);
+    line-height:30px;
+  }
+  .phoneMsg img{
+    width: 20px;
+    height: 20px;
   }
 </style>

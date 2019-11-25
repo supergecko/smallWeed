@@ -322,7 +322,7 @@
               src="../../../static/lmbImg/img17.png"
               fit="fill"></el-image>
             <div class="secondItemText">支持矿池直接打款</div>
-            <div class="secondItemExplain">可选择矿池直接将受益打给用户,BitDeer不参与收益的分配与划拨</div>
+            <div class="secondItemExplain">可选择矿池直接将受益打给用户,本商城不参与收益的分配与划拨</div>
           </el-row>
         </el-col>
         <el-col :span="6">

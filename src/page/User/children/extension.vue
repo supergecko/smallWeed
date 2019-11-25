@@ -31,7 +31,7 @@
               </div>
               <div class="info-title__item info-title__item--current"><span>当前身份</span>
                 <span class="measure-word rubik-medium">{{identity}}</span>
-                <i class="el-icon-info"></i>
+                <i class="el-icon-info" title="累计消费金额大于10万元即可升级为雷猫合伙人"></i>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@
         <el-col :span="12" class="withdraw-num">
           <div class="inv-tips withdraw-btn">
             <el-button type="info" @click="clickTransferBtn">申请转账</el-button>
-            <i class="el-icon-info"></i>
+            <i class="el-icon-info" title="请确认转账人信息"></i>
           </div>
 <!--          <div class="withdraw-right">-->
 <!--            <label class="address-label">提币地址</label>-->

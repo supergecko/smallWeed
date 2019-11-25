@@ -37,7 +37,7 @@ export default {
         { name: '我的订单', path: 'orderList', icon: 'el-icon-edit-outline' },
         { name: '我的推广', path: 'extension', icon: 'el-icon-s-promotion' },
         { name: '我的礼卷', path: 'coupon', icon: 'el-icon-s-ticket' },
-        { name: '推广返佣', path: 'rakeBack', icon: 'el-icon-s-ticket' }
+        { name: '推广返佣', path: 'rakeBack', icon: 'el-icon-date' }
         // { name: '资金管理',
         //   icon: 'el-icon-date',
         //   children: [
