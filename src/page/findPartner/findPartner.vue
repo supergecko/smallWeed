@@ -9,6 +9,37 @@
           设备持有人会获得一定的比特币作为奖励，通过此方法获得比特币的成本比直接从市面上采购的比特币成本更低。因此"挖矿"项目被市场所青睐。
         </div>
     </div>
+    <div class="discount">
+      <div class="title">
+        优 惠
+      </div>
+      <div class="discount_con">
+        <div class="con_1">
+          <img src="/static/partner/shaomiao.png">
+          <br/>
+          <p>
+            扫描二维码<br/>
+            即送200元
+          </p>
+        </div>
+        <div class="con_2">
+          <img src="/static/partner/kf.png">
+          <br/>
+          <br/>
+          <p>
+            雷猫商城专属客服
+          </p>
+        </div>
+        <div class="con_3">
+          <img src="/static/partner/kefu.png">
+          <br/>
+          <p>
+            咨询客服<br/>
+            立抢试用名额
+          </p>
+        </div>
+      </div>
+    </div>
     <div class="famous">
       <div class="famous_pic title">
         大 咖 说
@@ -74,14 +105,14 @@
         </div>
         <div class="dev_txt">
           <p style="font-size: 24px;">高达</p>
-          <p style="font-size: 36px;color: #CB1741;">12%</p>
+          <p style="font-size: 36px;color: yellow;">12%</p>
           <p style="font-size: 20px;">设备推荐奖励</p>
         </div>
       </div>
       <div class="reward_ele">
         <div class="ele_txt">
           <p style="font-size: 24px;">高达</p>
-          <p style="font-size: 36px;color: #CB1741;">7%</p>
+          <p style="font-size: 36px;color: yellow;">7%</p>
           <p style="font-size: 20px;">电费缴纳奖励</p>
         </div>
         <div style="float: right;position: relative;right: 100px;">
@@ -155,39 +186,6 @@
           福建省福州市鼓楼区国家863软件
           专业孵化器基地5楼512(领鹿谷）
         </div>
-      </div>
-    </div>
-    <div class="discount">
-      <div class="title">
-        优 惠
-      </div>
-      <div class="discount_con">
-        <div class="con_1">
-          <img src="/static/partner/sm.png">
-          <br/>
-          <p>
-            扫码<br/>
-            送200无门槛购物券
-          </p>
-        </div>
-        <div class="con_2">
-          <img src="/static/partner/red.png">
-          <br/>
-          <p>
-            成为合伙人<br/>
-            共享商城收益分红
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="llg">
-      <div class="qrCode">
-        <img src="/static/partner/kf.png" style="width:203px;" />
-        <br/><br/>
-        <p>
-          雷猫商城专属客服<br/>
-          扫描添加
-        </p>
       </div>
     </div>
   </div>
@@ -499,34 +497,38 @@ export default {
   .discount_con{
     width: 1330px;
     height:480px;
-    background:rgba(255,255,255,1);
+    background:rgba(146,89,250,0.3);
     border-radius:18px;
     margin: 86px auto;
     font-size:22px;
     font-family:Microsoft YaHei;
     font-weight:400;
-    color:rgba(102,102,102,1);
+    color:rgba(255,255,255,1);
     line-height:32px;
+  }
+  .discount_con div{
+    float: left;
+    margin: 120px;
   }
   .discount_con img{
     width: 174px;
     height: 174px;
+
   }
   .con_1{
-    width: 220px;
+    width: 200px;
     position: relative;
-    top:108px;
-    left: 200px;
     text-align: center;
-    float:left;
   }
   .con_2{
-    width: 220px;
+    width: 206px;
     position: relative;
-    top:108px;
-    right: 200px;
     text-align: center;
-    float:right;
+  }
+  .con_3{
+    width: 200px;
+    position: relative;
+    text-align: center;
   }
   .llg{
     width: 100%;

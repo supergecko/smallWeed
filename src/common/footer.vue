@@ -128,18 +128,11 @@
       </el-dialog>
 <!--      下载app-->
       <div class="appDown" v-if="appDownShow == true" v-on:click="greet(0)">
-        <p> 雷</p>
-        <p> 猫</p>
-        <p> A</p>
-        <p> P</p>
-        <p> P</p>
-        <p> 下</p>
-        <p> 载</p>
       </div>
       <el-col class="down_con" v-if="appConShow == true">
         <span class="close_down" type="button" v-on:click="greet(1)"><img src="/static/images/icon_del.png"></span>
         <p>雷猫APP下载</p>
-        <p style="width:124px;height:124px;"><img src="/static/images/app.jpg" style="width: 124px;"> </p>
+        <p style="width:124px;height:124px;"><img src="/static/images/app.png" style="width: 124px;"> </p>
         <p class="phoneMsg" style="width:170px;height:30px;"><span><img src="/static/svg/iOS.svg"/> </span>&nbsp;<strong>IOS</strong>&nbsp;&nbsp;|&nbsp;&nbsp;
           <span><img src="/static/svg/android.svg"/> </span>&nbsp;<strong>Android</strong></p>
       </el-col>
@@ -359,7 +352,7 @@ export default {
 .down1{
   width: 200px;
   height:200px;
-  background: url("/static/images/app.jpg") no-repeat;
+  background: url("/static/images/app.png") no-repeat;
   background-size: 100%;
   margin: 0px auto;
 }
@@ -379,8 +372,8 @@ export default {
     background-size:100%;
   }
 .appDown{
-  width: 74px;
-  height:180px;
+  width: 70px;
+  height:210px;
   border-color: #606266;
   position: fixed;
   left: 1%;
@@ -389,6 +382,7 @@ export default {
   bottom: 42%;
   z-index: 2019;
   background: url("/static/images/beiban.png") no-repeat;
+  background-size: 100%;
   font-size:16px;
   font-family:Microsoft YaHei;
   font-weight:400;
