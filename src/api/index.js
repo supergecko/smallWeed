@@ -170,4 +170,9 @@ export const cancelGoodOrder = (params) => {
 export const calculator = (params) => {
   return ypost(`${baseUrl}/home/index/calculator`, params)
 }
+// 合伙人信息输入
+export const joinPartner = (name, mobile) => {
+  // return ypost(`${baseUrl}/api/AlipayResult/getContact?name=` + params.name + '&mobile=' + params.phone, params)
+  return ypost(`${baseUrl}/api/AlipayResult/getContact?name=` + name + `&mobile=` + mobile)
+}
 

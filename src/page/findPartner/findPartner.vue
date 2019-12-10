@@ -13,31 +13,43 @@
       <div class="title">
         优 惠
       </div>
-      <div class="discount_con">
-        <div class="con_1">
-          <img src="/static/partner/shaomiao.png">
-          <br/>
-          <p>
-            扫描二维码<br/>
-            即送200元
-          </p>
-        </div>
-        <div class="con_2">
-          <img src="/static/partner/kf.png">
-          <br/>
-          <br/>
-          <p>
-            雷猫商城专属客服
-          </p>
-        </div>
-        <div class="con_3">
-          <img src="/static/partner/kefu.png">
-          <br/>
-          <p>
-            咨询客服<br/>
-            立抢试用名额
-          </p>
-        </div>
+      <div class="discount_con" >
+        <el-row>
+          <div class="con_1" style="float: left;margin-left: 109px;margin-top: 80px;">
+            <img src="/static/partner/shaomiao.png">
+            <br/>
+            <p>
+              扫描二维码<br/>
+              即送200元
+            </p>
+          </div>
+          <div class="con_2" style="float: left;margin-left: 210px;margin-top: 80px;">
+            <img src="/static/partner/kf.png">
+            <br/>
+            <br/>
+            <p>
+              雷猫商城专属客服
+            </p>
+          </div>
+          <div class="con_3" style="float: left;margin-left: 230px;margin-top: 80px;">
+            <img src="/static/partner/kefu.png">
+            <br/>
+            <p>
+              咨询客服<br/>
+              立抢试用名额
+            </p>
+          </div>
+        </el-row>
+        <el-row style="width:1000px;height:300px;margin: 100px auto;">
+          <img src="/static/partner/contant_us.png" style="width: 392px;height:394px;float: left;" >
+
+          <el-form style="width: 400px;height:200px;float: left;margin-left: 100px;margin-top: 30px;" :model="form">
+            <p>合伙人咨询者请留联系方式</p>
+            <el-input style="margin-top: 30px;" type="text" placeholder="请输入您的名字" v-model="form.name" :min="1" :max="20"></el-input>
+            <el-input style="margin-top: 30px;" type="text" placeholder="请输入您的电话号码" v-model="form.mobile" :min="1" :max="20"></el-input>
+            <el-button @click="submit" style="margin-top: 30px;">提交</el-button>
+          </el-form>
+        </el-row>
       </div>
     </div>
     <div class="famous">
@@ -192,7 +204,10 @@
 </template>
 
 <script>
+
 import { indexSEO } from '/api/index'
+import {joinPartner} from '/api'
+
 export default {
   data: function () {
     return {
@@ -202,7 +217,11 @@ export default {
       seoTitle: '',
       seoMateName: '',
       seoMateContent1: '',
-      seoMateContent2: ''
+      seoMateContent2: '',
+      form: {
+        name: '',
+        mobile: ''
+      }
     }
   },
   metaInfo () {
@@ -236,6 +255,31 @@ export default {
           this.seoMateContent2 = res.data.data.description
         } else {
           this.$message.error('网络赛车啦')
+        }
+      })
+    },
+    //  用户信息提交
+    submit () {
+      const mobile = this.form.mobile
+      if (!(/^1[34578]\d{9}$/.test(mobile))) {
+        this.$message({
+          message: '手机号码填写错误，请重新输入',
+          type: 'warning'
+        })
+        return
+      }
+
+      // var jsonF = JSON.stringify(this.form)
+      joinPartner(this.form.name, mobile).then(res => {
+        if (res.data.code === 1) {
+          this.form.name = ''
+          this.form.mobile = ''
+          this.$message({
+            message: '提交成功',
+            type: 'success'
+          })
+        } else {
+          this.$message.error('系统错误')
         }
       })
     }
@@ -496,7 +540,7 @@ export default {
   }
   .discount_con{
     width: 1330px;
-    height:480px;
+    height:967px;
     background:rgba(146,89,250,0.3);
     border-radius:18px;
     margin: 86px auto;
@@ -506,14 +550,9 @@ export default {
     color:rgba(255,255,255,1);
     line-height:32px;
   }
-  .discount_con div{
-    float: left;
-    margin: 120px;
-  }
   .discount_con img{
     width: 174px;
     height: 174px;
-
   }
   .con_1{
     width: 200px;
