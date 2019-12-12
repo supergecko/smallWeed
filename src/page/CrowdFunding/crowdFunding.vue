@@ -90,12 +90,29 @@
               <div class="goodItemMiddle" style="font-size: 14px;">
                 月化收益:{{item1.income}} BTC
               </div>
-<!--              <div class="goodItemMiddle" style="font-size: 14px;">-->
-<!--                团购价格:<span style="color:red;font-weight:bold">{{item1.shop_price}}</span>元-->
-<!--              </div>-->
+              <div class="goodItemMiddle" style="font-size: 15px;text-decoration:line-through;" v-if="i == 0">
+                <span>团购价格:</span>
+                <span>24999.00</span>
+                <span>元</span>
+              </div>
+              <div class="goodItemMiddle" style="font-size: 15px;text-decoration:line-through;" v-if="i == 1">
+                <span>团购价格:</span>
+                <span>16560.00</span>
+                <span>元</span>
+              </div>
+              <div class="goodItemMiddle" style="font-size: 15px;text-decoration:line-through;" v-if="i == 2">
+                <span>团购价格:</span>
+                <span>13714.00</span>
+                <span>元</span>
+              </div>
+              <div class="goodItemMiddle" style="font-size: 15px;text-decoration:line-through;" v-if="i == 3">
+                <span>团购价格:</span>
+                <span>4516.00</span>
+                <span>元</span>
+              </div>
 
               <div class="goodItemMiddle" style="font-size: 14px;">
-                <span v-if="item1.on_sale===1" style="color:red;font-weight:bold;font-size: 14px;">团购价格:</span>
+                <span v-if="item1.on_sale===1" style="color:red;font-weight:bold;font-size: 14px;">12.12狂欢:</span>
                 <span v-if="item1.on_sale===1" style="color:red;font-weight:bold;font-size: 20px;">{{item1.shop_price}}</span>
                 <span v-if="item1.on_sale===1" style="color:red;font-weight:bold;font-size: 14px;">元<br></span>
                 <span v-if="item1.on_sale!=1">团购价格:<span style="color:red;font-weight:bold">{{item1.shop_price}}</span>元</span>

@@ -211,9 +211,8 @@ import {joinPartner} from '/api'
 export default {
   data: function () {
     return {
-      bannerImg: [
-        '../../../static/imgs/banner.png'
-      ],
+      devUrl: 'https://www.leimaominer.com/userlogin',
+      testUrl: 'http://localhost:9999/login',
       seoTitle: '',
       seoMateName: '',
       seoMateContent1: '',
@@ -278,6 +277,7 @@ export default {
             message: '提交成功',
             type: 'success'
           })
+          window.location.href = this.devUrl
         } else {
           this.$message.error('系统错误')
         }
